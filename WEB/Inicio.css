@@ -1,0 +1,52 @@
+
+body {
+	background: #D3D3D3;
+}
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+	background: #fff;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    padding: 50px px; /* Ajusta el tamaño del botón aumentando el padding */
+    font-size: 18px; /* Ajusta el tamaño del texto del botón */
+    border: none;
+    background-color: #ff046f; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efecto de transición */
+}
+
+/* Estilos específicos para la página principal */
+
+#logout-button {
+    background-color: #ff046f; /* Cambia el color de fondo del botón de cierre de sesión */
+    margin-top: 20px;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
