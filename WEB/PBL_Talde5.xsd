@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Analisis_Software">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Paciente" maxOccurs="unbounded" minOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Sexo">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Hombre"/>
+                                        <xs:enumeration value="Mujer"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Hospital" type="xs:string"/>
+                            <xs:element name="Telefono">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="[67]\d{8}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="HistorialMedico">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Entrada" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Fecha">
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="Descripcion" type="xs:string"/>
+                                                    <xs:element name="Tratamiento">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:choice maxOccurs="unbounded">
+                                                                    <xs:element name="Medicacion">
+                                                                        <xs:complexType>
+                                                                            <xs:sequence>
+                                                                                <xs:element name="NombreMed" type="xs:string"/>
+                                                                                <xs:element name="Dosis">
+                                                                                    <xs:simpleType>
+                                                                                        <xs:restriction base="xs:string">
+                                                                                            <xs:pattern value="\d+(mg|g)"/>
+                                                                                        </xs:restriction>
+                                                                                    </xs:simpleType>
+                                                                                </xs:element>
+                                                                                <xs:element name="Frecuencia" type="xs:string"/>
+                                                                            </xs:sequence>
+                                                                        </xs:complexType>
+                                                                    </xs:element>
+                                                                    <xs:element name="Procedimiento">
+                                                                        <xs:complexType>
+                                                                            <xs:sequence>
+                                                                                <xs:element name="Tipo" type="xs:string"/>
+                                                                            </xs:sequence>
+                                                                        </xs:complexType>
+                                                                    </xs:element>
+                                                                </xs:choice>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Glaucoma">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Diagnostico">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Resultado">
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration value="Si"/>
+                                                                <xs:enumeration value="No"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="FechaDiagnostico">
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+													<xs:element name="Imagen"></xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="\d{4}[A-Z]{3}"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+

@@ -1,0 +1,29 @@
+ <!DOCTYPE Analisis_Software [
+<!ELEMENT Analisis_Software (Paciente+)>
+
+<!ELEMENT Paciente (Sexo, Hospital, Telefono, HistorialMedico, Glaucoma)>
+<!ATTLIST Paciente id CDATA #REQUIRED>
+
+<!ELEMENT Sexo (#PCDATA)>
+<!ELEMENT Hospital (#PCDATA)>
+<!ELEMENT Telefono (#PCDATA)>
+
+<!ELEMENT HistorialMedico (Entrada+)>
+<!ELEMENT Entrada (Fecha, Descripcion, Tratamiento)>
+<!ELEMENT Fecha (#PCDATA)>
+<!ELEMENT Descripcion (#PCDATA)>
+<!ELEMENT Tratamiento (Medicacion | Procedimiento)*>
+
+<!ELEMENT Medicacion (NombreMed, Dosis, Frecuencia)>
+<!ELEMENT Procedimiento (Tipo)>
+<!ELEMENT NombreMed (#PCDATA)>
+<!ELEMENT Dosis (#PCDATA)>
+<!ELEMENT Frecuencia (#PCDATA)>
+<!ELEMENT Tipo (#PCDATA)>
+
+<!ELEMENT Glaucoma (Diagnostico)>
+<!ELEMENT Diagnostico (Resultado, FechaDiagnostico, Imagen)>
+<!ELEMENT Resultado (#PCDATA)>
+<!ELEMENT FechaDiagnostico (#PCDATA)>
+<!ELEMENT Imagen (#PCDATA)>
+]>

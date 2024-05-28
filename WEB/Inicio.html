@@ -1,0 +1,67 @@
+<html lang="en">
+	<head>
+		 <meta charset="UTF-8">
+		 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		 <title>Pagina Web</title>
+		 
+		  <!-- font awesome cdn link  -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+		<link rel="stylesheet" href="Inicio.css" >
+	
+	</head>
+	
+	<body>
+		<header>
+			<a href="Principal.html" class="logo">
+				<img src="ImagenesPBL/Logo2.png" alt="Logo" class="logo-img">
+			</a>
+			
+			<nav class="navbar">
+				<ul>
+					<li><a href="Principal.html" class="active">Inicio</a></li>
+					<li><a href="Sobrenosotros.html">Quiénes somos</a></li>
+					<li><a href="Producto.html">Productos</a></li>
+					<li><a href="Inicio.html">Área cliente</a></li>
+					<li><a href="Contacto.html">Contacto</a></li>
+					<li><a href="Preguntas.html">FAQ</a></li>
+				</ul>
+			</nav>
+			<div class="fas fa-bars"></div>
+		</header>
+    <div class="login-container">
+        <h2>Iniciar sesión</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <a href="script.js"><button>Inicia sesión</button></a>
+        </form>
+    </div>
+	<div class="espacio"></div>
+	<section class="footer">
+        <div class="contact-location-container">
+			<div class="contact">
+				<h2>Contacto</h2>
+				<ul>
+					<li>Teléfono: <a href="tel:+123456789">+34648951789</a></li>
+					<li>Email: <a href="mailto:info@tusitioweb.com">info@eyehealthdiagnostics.com</a></li>
+				</ul>
+			</div>
+			<div class="location">
+				<h2>Ubicación</h2>
+				<address>
+					Dirección: Loramendi kalea, 4, Mondragón, España<br>
+					<img src="ImagenesPBL/Mapa.png" class="image" width="400" height="200">
+				</address>
+			</div>
+		</div>
+		<p class="footer-text">&copy; 2024 EyeHealth Diagnostics. Todos los derechos reservados.</p>
+		</section>
+    <script src="script.js"></script>
+</body>
+</html>

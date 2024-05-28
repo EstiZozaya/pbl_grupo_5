@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="PBL_Talde5.xslt"?>
+<Analisis_Software xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PBL_Talde5.xsd">
+	<Paciente id="7834RTG">
+		<Sexo>Hombre</Sexo>
+		<Hospital>Alto Deba</Hospital>
+		<Telefono>648947623</Telefono>
+		<HistorialMedico>
+            <Entrada>
+                <Fecha>2010-05-20</Fecha>
+                <Descripcion>Diagnóstico de Diabetes Tipo 2</Descripcion>
+                <Tratamiento>
+                    <Medicacion>
+                        <NombreMed>Metformina</NombreMed>
+                        <Dosis>500mg</Dosis>
+                        <Frecuencia>2 veces al día</Frecuencia>
+                    </Medicacion>
+                </Tratamiento>
+            </Entrada>
+            <Entrada>
+                <Fecha>2015-08-15</Fecha>
+                <Descripcion>Cirugía de Cataratas</Descripcion>
+                <Tratamiento>
+                    <Procedimiento>
+                        <Tipo>Extracción de Cataratas</Tipo>
+                    </Procedimiento>
+                </Tratamiento>
+            </Entrada>
+		</HistorialMedico>
+		<Glaucoma>
+			<Diagnostico>
+				<Resultado>Si</Resultado>
+				<FechaDiagnostico>2022-11-15</FechaDiagnostico>
+				<Imagen>C:\Users\izaro\OneDrive\Escritorio\biomedika\TERCERO\Segundo cuatri\PBL\MIO\WEB\ImagenesPBL\Glaucoma.jpg</Imagen>
+			</Diagnostico>
+		</Glaucoma>
+	</Paciente>
+	<Paciente id="6729LMT">
+		<Sexo>Mujer</Sexo>
+		<Hospital>Hospital de Navarra</Hospital>
+		<Telefono>787250293</Telefono>
+		<HistorialMedico>
+            <Entrada>
+                <Fecha>2014-07-18</Fecha>
+                <Descripcion>Diagnóstico de Cancer de Pancreas</Descripcion>
+                <Tratamiento>
+                    <Medicacion>
+                        <NombreMed>Eribulina</NombreMed>
+                        <Dosis>500mg</Dosis>
+                        <Frecuencia>1 al día</Frecuencia>
+                    </Medicacion>
+                </Tratamiento>
+            </Entrada>
+		</HistorialMedico>
+		<Glaucoma>
+			<Diagnostico>
+				<Resultado>No</Resultado>
+				<FechaDiagnostico>2022-11-15</FechaDiagnostico>
+				<Imagen>C:\Users\izaro\OneDrive\Escritorio\biomedika\TERCERO\Segundo cuatri\PBL\MIO\WEB\ImagenesPBL\Glaucoma2.jpg</Imagen>
+			</Diagnostico>
+		</Glaucoma>
+	</Paciente>
+</Analisis_Software>

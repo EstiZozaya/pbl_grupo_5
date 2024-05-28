@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+    text-decoration: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::selection {
+    background: #ff086f;
+    color: #fff;
+}
+
+html, body {
+    font-size: 65%;
+    overflow-x: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    background: #D3D3D3;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.heading {
+    font-size: 4rem;
+    color: #ff046f;
+    text-align: center;
+    padding: 6rem 1rem 0 0;
+    letter-spacing: .2rem;
+    font-weight: 500;
+}
+
+.title {
+    padding: 0 4rem;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 400;
+    color: #fff;
+}
+
+header {
+    width: 100%;
+    background: #000000;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.5rem;
+    z-index: 1000;
+    transition: .2s;
+}
+.logo-img {
+    max-width: 250px; /* Define un tamaño máximo para la imagen */
+    height: auto; /* Mantiene la proporción de aspecto */
+}
+header .navbar ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+header .navbar ul li {
+    margin: 0 1rem;
+}
+
+header .navbar ul li a {
+    font-size: 2rem;
+    color: #fff;
+    transition: .2s;
+}
+
+header .navbar ul li .active,
+header .navbar ul li a:hover {
+    color: #ff046f;
+}
+
+header .logo {
+    font-size: 2.5rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+header .fa-bars {
+    font-size: 3rem;
+    color: #ff046f;
+    cursor: pointer;
+    display: none;
+    transition: .2s;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    height: 300px;
+    text-align: center;
+	margin: 120px auto 0;
+}
+
+.login-container h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+    font-size: 1.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+button {
+    width: 75%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff046f;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e0045c;
+}
+
+a {
+    text-decoration: none;
+}
+
+.footer {
+    background: #000;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+}
+
+.footer .icons {
+    padding: 3rem 0;
+}
+
+.footer .icons a {
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.2rem;
+    text-align: center;
+    border-radius: 50%;
+    color: #c63bfa;
+    border: .2rem solid #c63bfa;
+    font-size: 2rem;
+    margin: 0 .1rem;
+    transition: .2s linear;
+}
+
+.footer .icons a:hover {
+    color: #fff;
+    background: #ff046f;
+    border-color: #ff046f;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #000;
+}
+
+.footer address {
+    list-style-type: none;
+    padding: 0;
+    color: #fff;
+    font-size: 1.2rem;
+    background: #000;
+}
+
+.footer h2 {
+    font-size: 3rem;
+    color: #fff;
+    padding: 0 1rem;
+    text-shadow: 0 .3rem .5rem rgba(0, 0, 0, .3);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.contact-location-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.contact, .location {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-text {
+    font-size: 1.4rem;
+    color: #fff;
+    padding: 1.3rem 0;
+    margin-top: 20px;
+    text-align: center;
+}

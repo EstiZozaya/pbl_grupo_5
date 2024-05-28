@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<personas>
+    <persona>
+        <nombre>Juan</nombre>
+        <edad>30</edad>
+        <ciudad>Madrid</ciudad>
+    </persona>
+    <persona>
+        <nombre>Ana</nombre>
+        <edad>25</edad>
+        <ciudad>Barcelona</ciudad>
+    </persona>
+</personas>
