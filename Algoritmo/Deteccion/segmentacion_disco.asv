@@ -71,7 +71,7 @@ se = strel('disk', 30);
 disco = imdilate(disco, se);
 disco = imfill(disco, "holes");
 
-disco_mejorado = activecontour (I_gray, disco);
+disco_mejorado = activecontour (roi, disco);
 
 se = strel('disk', 10);
 disco_mejorado = imdilate(disco_mejorado, se);
