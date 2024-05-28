@@ -58,57 +58,56 @@ e_rojo2 = entropy(canal_rojo_sin_vasos2);  % 5 bien
 e_verde2 = entropy(canal_verde_sin_vasos2);
 e_azul2 = entropy(canal_azul_sin_vasos2);
 
-if e_gris2 > 4.5 && e_gris2 < 5 && e_rojo2 < 5.5 %gris >6
-     T = graythresh(gray_sin_vasos2);
-    disc_threshold = 0.4 * max(gray_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+e_gris = ceil(e_gris2);
+e_rojo = ceil(e_rojo2);  % 5 bien
+e_verde = ceil(e_verde2);
+e_azul = ceil(e_azul2);
+
+if e_gris >= e_verde && e_gris > e_rojo  
+    T_gris = graythresh(gray_sin_vasos2);
+    disc_threshold = 0.6 * max(gray_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
     disc_binary = gray_sin_vasos2 > disc_threshold; % Segmentación del disco completo
-elseif e_gris2 > 5 && e_rojo2 < 5.5 %gris >6
-     T = graythresh(gray_sin_vasos2);
-    disc_threshold = 0.5 * max(gray_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-    % 0.6
-    disc_binary = gray_sin_vasos2 > disc_threshold; % Segmentación del disco completo
+
+    disc_binary = activecontour(gray_sin_vasos2, disc_binary, 200);
 else 
     disc_binary = ones(size(gray_sin_vasos));
 end
 
-if e_rojo2 > 5 && e_rojo2 < 5.5 && e_gris2 > 5
-    T = graythresh(canal_rojo_sin_vasos2);
+if e_rojo >= e_verde && e_rojo2 > 4.5 && e_rojo < e_azul
+    if e_rojo >= 6
+        disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+        disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
+        if e_rojo2 < 5
+            disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
+        end
+    else
+        disc_thresholdR = 0.7 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+        disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
+        disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
+    end
+elseif e_rojo >= e_gris && e_rojo2 > 4.5
     disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-
-    disc_binaryR = canal_rojo_sin_vasos2 > T; % Segmentación del disco completo
-% elseif e_rojo2 > 4 && e_rojo2 < 6 
-%     disc_thresholdR = 0.7 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-% 
-%     disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR; % Segmentación del disco completo
-elseif e_rojo2 >= 5.5
-    T = graythresh(canal_rojo_sin_vasos2);
-    disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-
-    disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR; % Segmentación del disco completo
-elseif e_rojo2 >= 6 
-    disc_thresholdR = 0.7 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-
     disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
+    if e_rojo2 < 5
+            disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
+    end
 else 
     disc_binaryR = ones(size(gray_sin_vasos));
 end
 
-if e_verde2 > 5 && e_rojo2 < 5
-T = graythresh(canal_verde_sin_vasos2);
-    disc_thresholdG = 0.55 * max(canal_verde_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-    
-    disc_binaryG = canal_verde_sin_vasos2 > T; % Segmentación del disco completo
-% elseif e_verde2 > 6 && e_rojo2 < 5
-%         disc_thresholdG = 0.5 * max(canal_verde_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-%     
-%     disc_binaryG = canal_verde_sin_vasos2 > disc_thresholdG;
+if e_verde > e_rojo && e_gris > e_rojo 
+    T_verde = graythresh(canal_verde_sin_vasos2);
+    disc_thresholdG = 0.5 * max(canal_verde_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+    disc_binaryG = canal_verde_sin_vasos2 > disc_thresholdG; % Segmentación del disco completo
+
+    disc_binaryG = activecontour(canal_verde_sin_vasos2, disc_binaryG, 200);
 else 
     disc_binaryG = ones(size(gray_sin_vasos));
 end
 
-if e_azul2 > 4.5 && e_rojo2 < 5
-    T = graythresh(canal_azul_sin_vasos2);
-    disc_thresholdB = 0.5 * max(canal_azul_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+if e_azul >= e_verde
+    T_azul = graythresh(canal_azul_sin_vasos2);
+    disc_thresholdB = 0.4 * max(canal_azul_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
     
     disc_binaryB = canal_azul_sin_vasos2 > disc_thresholdB; % Segmentación del disco completo
 else 
@@ -124,18 +123,18 @@ if disc_binary_comun(:) == 1
         disc_thresholdR = 0.7 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
         disc_binary_comun = canal_rojo_sin_vasos2 > T; % Segmentación del disco completo
     else
-        disc_threshold = 0.5 * max(gray_sin_vasos2(:));
+        disc_threshold = 0.7 * max(gray_sin_vasos2(:));
          T = graythresh(gray_sin_vasos2);
         disc_binary = gray_sin_vasos2 > disc_threshold;
     
         T = graythresh(gray_sin_vasos2);
-        disc_thresholdG = 0.4 * max(canal_verde_sin_vasos2(:)); 
+        disc_thresholdG = 0.6 * max(canal_verde_sin_vasos2(:)); 
         disc_binaryG = canal_verde_sin_vasos2 > disc_thresholdG;
     
         disc_binary_comun = disc_binary & disc_binaryG;
+        disc_binary_comun = activecontour(gray_sin_vasos2, disc_binary_comun, 200);
     end
 end
-
 
 se = strel('disk', 20);
 disco = imerode(disc_binary_comun, se);
@@ -143,8 +142,6 @@ disco = bwareafilt(disco, 1);
 se = strel('disk', 30);
 disco = imdilate(disco, se);
 disco = imfill(disco, "holes");
-
-disco = activecontour(disco, roi);
 
 [filaD, columnaD] = find(disco == max(disco(:)));
 % Calcula el centroide
