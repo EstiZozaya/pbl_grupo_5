@@ -11,7 +11,7 @@ green_channel = roi(:, :, 2);
 blue_channel = roi(:, :, 3);
 I_gray = rgb2gray(roi);
 
-se = strel('disk', 300);
+se = strel('disk', 250);
 
 % Estimar el fondo usando la apertura morfológica para cada canal
 background_red = imopen(red_channel, se);
@@ -36,7 +36,7 @@ green_channel= corrected_green;
 blue_channel = corrected_blue;
 I_gray = corrected_gray;
 
-se = strel('disk', 20); 
+se = strel('disk', 15); 
 canal_verde_sin_vasos = imclose(green_channel, se);
 canal_rojo_sin_vasos = imclose(red_channel, se); %el canal rojo no tiene vasos
 canal_azul_sin_vasos = imclose(blue_channel, se);
@@ -143,6 +143,8 @@ disco = bwareafilt(disco, 1);
 se = strel('disk', 30);
 disco = imdilate(disco, se);
 disco = imfill(disco, "holes");
+
+disco = activecontour(disco, roi);
 
 [filaD, columnaD] = find(disco == max(disco(:)));
 % Calcula el centroide
