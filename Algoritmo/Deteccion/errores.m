@@ -35,9 +35,9 @@ if max(disco(:)) == min(disco(:))
     error_disco(i) = 1;
 % SI Imin == Imax entoces es que la imagen es toda blanca o toda negra ->
 % NO SIRVE
-elseif ancho_maximoD > alto_maximoD*2 
+elseif ancho_maximoD > alto_maximoD*1.5
     error_disco(i) = 1;
-elseif ancho_maximoD*2 < alto_maximoD
+elseif ancho_maximoD*1.5 < alto_maximoD
     error_disco(i) = 1;
 else 
     error_disco(i) = 0;

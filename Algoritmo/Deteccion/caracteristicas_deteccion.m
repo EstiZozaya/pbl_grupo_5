@@ -77,10 +77,10 @@ green_channel = double(green_channel);
 blue_channel = double(blue_channel);
 
 I = double(rgb2gray(roi)); % damos por hecho que la imagen es de color (igual hacer un for para diferenciar)
-media (i) =mean(roi(:));
-media_g (i) =mean(green_channel(:));
-media_b (i) =mean(blue_channel(:));
-media_r (i) =mean(red_channel(:));
+media (i) = mean(roi(:));
+media_g (i) = mean(green_channel(:));
+media_b (i) = mean(blue_channel(:));
+media_r (i) = mean(red_channel(:));
 
 rango_dinamico(i)=max(I(:))-min(I(:));
 rango_dinamicoR(i)=max(red_channel(:))-min(red_channel(:));
@@ -155,4 +155,4 @@ T_caracteristicas_DETECCION = table(entropia, entropiaR, entropiaG, entropiaB, r
 
 T_caracteristicas_DETECCION.imagen = T_buenacalidad_revisadas.image;
 T_caracteristicas_DETECCION.glaucoma = T_buenacalidad_revisadas.glaucoma;
-writetable(T_caracteristicas_DETECCION, 'CaracteristicasDETECCION.csv');
+writetable(T_caracteristicas_DETECCION, 'CaracteristicasDETECCION2.csv');
