@@ -70,7 +70,7 @@ if e_gris >= e_verde && e_gris > e_rojo
 
     disc_binary = activecontour(gray_sin_vasos2, disc_binary, 200);
 else 
-    disc_binary = ones(size(gray_sin_vasos));
+    disc_binary = ones(size(gray_sin_vasos)); %imagen blanca pq luego se juntan los canales
 end
 
 if e_rojo >= e_verde && e_rojo2 > 4.5 && e_rojo < e_azul
@@ -85,12 +85,9 @@ if e_rojo >= e_verde && e_rojo2 > 4.5 && e_rojo < e_azul
         disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
         disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
     end
-elseif e_rojo >= e_gris && e_rojo2 > 4.5
+elseif e_rojo >= e_gris && e_rojo2 > 4.5 && e_rojo < e_verde
     disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
     disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
-    if e_rojo2 < 5
-            disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
-    end
 else 
     disc_binaryR = ones(size(gray_sin_vasos));
 end
@@ -99,40 +96,56 @@ if e_verde > e_rojo && e_gris > e_rojo
     T_verde = graythresh(canal_verde_sin_vasos2);
     disc_thresholdG = 0.5 * max(canal_verde_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
     disc_binaryG = canal_verde_sin_vasos2 > disc_thresholdG; % Segmentación del disco completo
-
     disc_binaryG = activecontour(canal_verde_sin_vasos2, disc_binaryG, 200);
 else 
     disc_binaryG = ones(size(gray_sin_vasos));
 end
 
-if e_azul >= e_verde
+if e_azul >= e_verde || e_azul >= 5
     T_azul = graythresh(canal_azul_sin_vasos2);
     disc_thresholdB = 0.4 * max(canal_azul_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-    
+    if e_azul >= 5 && e_azul < e_verde 
+        if e_azul2 >= 4.75
+            disc_thresholdB = 0.6 * max(canal_azul_sin_vasos2(:));
+        else
+            disc_thresholdB = 0.8 * max(canal_azul_sin_vasos2(:));
+        end
+    end
     disc_binaryB = canal_azul_sin_vasos2 > disc_thresholdB; % Segmentación del disco completo
+     disc_binaryB = activecontour(canal_verde_sin_vasos2, disc_binaryB, 200);
 else 
     disc_binaryB = ones(size(gray_sin_vasos));
 end
 
-% Operación lógica de intersección para la segmentación del disco
-disc_binary_comun = disc_binary & disc_binaryR & disc_binaryG  & disc_binaryB;
+% Operación lógica de intersección para la segmentación del disco 
+disc_binary_comun = disc_binary & disc_binaryR & disc_binaryG  & disc_binaryB; %juntar los canales
 
+% si la imagen se queda blanca (por si los otros if ninguno sirve)
 if disc_binary_comun(:) == 1
     if e_rojo2 > e_gris2 && e_rojo2 > 4.5
-        T = graythresh(canal_rojo_sin_vasos2);
-        disc_thresholdR = 0.7 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-        disc_binary_comun = canal_rojo_sin_vasos2 > T; % Segmentación del disco completo
+        if e_rojo >= 6
+            disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+        else
+            disc_thresholdR = 0.8 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+        end
+        disc_binary_comun = canal_rojo_sin_vasos2 > disc_thresholdR; 
+        if e_rojo2 < 4.75
+            disc_binary_comun = activecontour(canal_rojo_sin_vasos2, disc_binary_comun, 200);
+        end
     else
-        disc_threshold = 0.7 * max(gray_sin_vasos2(:));
-         T = graythresh(gray_sin_vasos2);
+        disc_threshold = 0.6 * max(gray_sin_vasos2(:));
         disc_binary = gray_sin_vasos2 > disc_threshold;
-    
-        T = graythresh(gray_sin_vasos2);
+        disc_binary = activecontour(canal_verde_sin_vasos2, disc_binary, 200);
+
         disc_thresholdG = 0.6 * max(canal_verde_sin_vasos2(:)); 
         disc_binaryG = canal_verde_sin_vasos2 > disc_thresholdG;
+%         disc_binaryG = activecontour(canal_verde_sin_vasos2, disc_binaryG, 200);
+
+        disc_thresholdB = 0.7 * max(canal_azul_sin_vasos2(:)); 
+        disc_binaryB = canal_azul_sin_vasos2 > disc_thresholdB;
+        disc_binaryB = activecontour(canal_verde_sin_vasos2, disc_binaryB, 200);
     
-        disc_binary_comun = disc_binary & disc_binaryG;
-        disc_binary_comun = activecontour(gray_sin_vasos2, disc_binary_comun, 200);
+        disc_binary_comun = disc_binary & disc_binaryG & disc_binaryB;
     end
 end
 
@@ -153,11 +166,11 @@ ancho_maximo = max(filaD) - min(filaD);
 alto_maximo = max(columnaD) - min(columnaD);
 radio_disco = max(ancho_maximo, alto_maximo) / 2;
 
-carpeta_DISCO = 'segmentacion_disco2';
+carpeta_DISCO = 'segmentacion_disco4';
 mkdir(carpeta_DISCO);
 
 nombre_imagen = T_buenacalidad_revisadas.image{i};
-nombre_imagen_con_disco = ['DISCO2', nombre_imagen];
+nombre_imagen_con_disco = ['DISCO4', nombre_imagen];
 % Guardar la imagen en la carpeta
 [~, nombre_sin_extension, extension] = fileparts(nombre_imagen_con_disco);
 nombre_imagen_guardada = fullfile(carpeta_DISCO, [nombre_sin_extension, extension]);

@@ -40,7 +40,7 @@ filtro_laplace=[1, 1, 1; 1, -8, 1; 1, 1, 1];
 
 for i=1:n
 copa = imread(['COPA', T_buenacalidad_revisadas.image{i}]);
-disco = imread(['DISCO2', T_buenacalidad_revisadas.image{i}]);
+disco = imread(['DISCO4', T_buenacalidad_revisadas.image{i}]);
 roi = imread(['ROI', T_buenacalidad_revisadas.image{i}]);
 
 [filaD, columnaD] = find(disco == max(disco(:)));
@@ -66,14 +66,15 @@ radio_copa = max(ancho_maximo, alto_maximo) / 2;
 red_channel = roi(:, :, 1);
 green_channel = roi(:, :, 2);
 blue_channel = roi(:, :, 3);
-red_channel = double(red_channel);
-green_channel = double(green_channel);
-blue_channel = double(blue_channel);
 
 entropia(i) = entropy(roi);
 entropiaR(i) = entropy(red_channel);
 entropiaG(i) = entropy(green_channel);
 entropiaB(i) = entropy(blue_channel);
+
+red_channel = double(red_channel);
+green_channel = double(green_channel);
+blue_channel = double(blue_channel);
 
 I = double(rgb2gray(roi)); % damos por hecho que la imagen es de color (igual hacer un for para diferenciar)
 media (i) =mean(roi(:));
