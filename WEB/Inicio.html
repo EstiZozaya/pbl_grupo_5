@@ -39,8 +39,21 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <a href="script.js"><button>Inicia sesión</button></a>
+            <button id="login-button">Inicia sesión</button>
         </form>
+		<script>
+			// Obtener el botón de inicio de sesión
+			var loginButton = document.getElementById("login-button");
+
+			// Agregar un evento de clic al botón de inicio de sesión
+			loginButton.addEventListener("click", function(event) {
+				// Prevenir el comportamiento predeterminado del enlace
+				event.preventDefault();
+
+				// Redireccionar la página al archivo XML deseado
+				window.location.href = "PBL_Talde5.xml";
+			});
+</script>
     </div>
 	<div class="espacio"></div>
 	<section class="footer">

@@ -10,85 +10,92 @@
 	box-sizing:border-box;
 	
 }
+
+*::selection {
+	background:#ff086f;
+	color:#fff;
+}
+
+html {
+	font-size: 65%;
+	overflow-x: hidden;
+}
+
 body {
 	background: #D3D3D3;
 }
 
-header1 {
+.heading {
+	font-size: 4rem;
+	color:#ff046f;
+	text-align:center;
+	padding: 6rem 1rem 0 0;
+	letter-spacing: .2rem;
+	font-weight: 500;
+}
+
+.title{
+	padding: 0 4rem;
+	font-size: 2rem;
+	text-align: center;
+	font-weight: 400;
+	color:#fff;
+}
+
+header {
 	width:100%;
 	background:#000000;
 	position:fixed;
 	display:flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0.2rem 0.8rem;
+	padding: 0.8rem 1.5rem;
 	z-index: 1000;
 	transition: .2s;
-	margin-top: 0rem;
 }
 .logo-img {
     max-width: 250px; /* Define un tamaño máximo para la imagen */
     height: auto; /* Mantiene la proporción de aspecto */
-    margin-left: 0 !important; /* Asegura que el margen izquierdo sea 0 */
 }
 
-header1 .navbar ul {
+header .navbar ul {
 	display:flex;
 	align-items: center;
 	justify-content: space-between;
 	list-style:none;
 }
 
-header1 .navbar ul li {
+header .navbar ul li {
 	margin: 0 1rem;
 }
 
-header1 .navbar ul li a {
-	font-size: 1.2rem;
+header .navbar ul li a {
+	font-size: 2rem;
 	color:#fff;
 	transition: .2s;
 }
 
-header1 .navbar ul li .active,
-header1 .navbar ul li a:hover {
+header .navbar ul li .active,
+header .navbar ul li a:hover {
 	color:#ff046f;
 }
 
-header1 .logo {
+header .logo {
 	font-size: 2.5rem;
 	color:#fff;
 	text-transform:uppercase
 }
 
-header1 .fa-bars {
+header .fa-bars {
 	font-size:3rem;
 	color:#ff046f;
 	cursor:pointer;
 	display:none;
 	transition: .2s;
-}
-header2 {
-    background-color: #008080;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-	margin-top: 40px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Estilos para la sección del producto */
-
-
+} 
 .quienes {
     background-color: #fff;
-	margin-top: 30px;
-    margin: 40px auto;
+    margin: 70px auto;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -97,21 +104,16 @@ footer {
 
 .quienes h2 {
     color: #ff046f;
+	font-size: 2.8rem;
 }
 .quienes h3 {
     color: #008080;
+	font-size: 2rem;
 }
 
 .quienes p {
     color: #333;
-	font-size:1rem;
-}
-
-.quienes img {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    height: auto;
+	font-size:1.3rem;
 }
 
 .quienes ul {
@@ -125,9 +127,8 @@ footer {
 }
 .mision {
     background-color: #fff;
-	margin-top: 30px;
-    margin: 40px auto;
-    padding: 20px;
+    margin: 30px auto;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 800px;
@@ -135,11 +136,12 @@ footer {
 
 .mision h2 {
     color: #ff046f;
+	font-size: 2.8rem;
 }
 
 .mision p {
     color: #333;
-	font-size:1rem;
+	font-size:1.3rem;
 }
 
 .mision ul {
@@ -163,11 +165,12 @@ footer {
 
 .valores h2 {
     color: #ff046f;
+	font-size: 2.8rem;
 }
 
 .valores p {
     color: #333;
-	font-size:1rem;
+	font-size:1.3rem;
 }
 
 .valores ul {
@@ -224,12 +227,12 @@ body {
 }
 
 .team-member h3 {
-    font-size: 1.2em;
+    font-size: 2rem;
     margin: 10px 0 5px;
 }
 
 .team-member p {
-    font-size: 0.9em;
+    font-size: 1.3em;
     color: #555;
 }
 .compromiso {
@@ -244,11 +247,12 @@ body {
 
 .compromiso h2 {
     color: #ff046f;
+	font-size: 2.8rem;
 }
 
 .compromiso p {
     color: #333;
-	font-size:1rem;
+	font-size:1.5rem;
 }
 
 .compromiso ul {
@@ -272,11 +276,12 @@ body {
 
 .futuro h2 {
     color: #ff046f;
+	font-size: 2.8rem;
 }
 
 .futuro p {
     color: #333;
-	font-size:1rem;
+	font-size:1.3rem;
 }
 
 .futuro ul {

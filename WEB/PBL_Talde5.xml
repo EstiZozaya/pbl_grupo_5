@@ -31,7 +31,7 @@
 			<Diagnostico>
 				<Resultado>Si</Resultado>
 				<FechaDiagnostico>2022-11-15</FechaDiagnostico>
-				<Imagen>C:\Users\izaro\OneDrive\Escritorio\biomedika\TERCERO\Segundo cuatri\PBL\MIO\WEB\ImagenesPBL\Glaucoma.jpg</Imagen>
+				<Imagen>ImagenesPBL/Glaucoma.jpg</Imagen>
 			</Diagnostico>
 		</Glaucoma>
 	</Paciente>
@@ -56,7 +56,7 @@
 			<Diagnostico>
 				<Resultado>No</Resultado>
 				<FechaDiagnostico>2022-11-15</FechaDiagnostico>
-				<Imagen>C:\Users\izaro\OneDrive\Escritorio\biomedika\TERCERO\Segundo cuatri\PBL\MIO\WEB\ImagenesPBL\Glaucoma2.jpg</Imagen>
+				<Imagen>ImagenesPBL/Glaucoma2.jpg</Imagen>
 			</Diagnostico>
 		</Glaucoma>
 	</Paciente>
