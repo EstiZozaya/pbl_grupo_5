@@ -7,82 +7,105 @@
 	outline: none;
 	margin:0;
 	padding:0;
-	box-sizing:border-box;	
+	box-sizing:border-box;
+	
 }
-header1 {
+
+*::selection {
+	background:#ff086f;
+	color:#fff;
+}
+
+html {
+	font-size: 65%;
+	overflow-x: hidden;
+}
+
+body {
+	background: #D3D3D3;
+}
+
+.heading {
+	font-size: 4rem;
+	color:#ff046f;
+	text-align:center;
+	padding: 6rem 1rem 0 0;
+	letter-spacing: .2rem;
+	font-weight: 500;
+}
+
+.title{
+	padding: 0 4rem;
+	font-size: 2rem;
+	text-align: center;
+	font-weight: 400;
+	color:#fff;
+}
+
+header {
 	width:100%;
 	background:#000000;
 	position:fixed;
 	display:flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0.2rem 0.8rem;
+	padding: 0.8rem 1.5rem;
 	z-index: 1000;
 	transition: .2s;
 }
+.logo-img {
+    max-width: 250px; /* Define un tamaño máximo para la imagen */
+    height: auto; /* Mantiene la proporción de aspecto */
+}
 
-header1 .navbar ul {
+header .navbar ul {
 	display:flex;
 	align-items: center;
 	justify-content: space-between;
 	list-style:none;
 }
 
-header1 .navbar ul li {
+header .navbar ul li {
 	margin: 0 1rem;
 }
 
-header1 .navbar ul li a {
-	font-size: 1.5rem;
+header .navbar ul li a {
+	font-size: 2rem;
 	color:#fff;
 	transition: .2s;
 }
 
-header1 .navbar ul li .active,
-header1 .navbar ul li a:hover {
+header .navbar ul li .active,
+header .navbar ul li a:hover {
 	color:#ff046f;
 }
 
-header1 .logo {
+header .logo {
 	font-size: 2.5rem;
 	color:#fff;
 	text-transform:uppercase
 }
 
-header1 .fa-bars {
+header .fa-bars {
 	font-size:3rem;
 	color:#ff046f;
 	cursor:pointer;
 	display:none;
 	transition: .2s;
-}
-header2 {
-    background-color: #008080;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-	margin-top: 40px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
+} 
 .video .content {
     background-color: #fff;
-	margin-top: 60px;
     margin: 0px auto;
-    padding: 20px;
+    padding: 60px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
+    max-width: 900px;
 }
 
 .video h1 {
     color: #ff046f;
 	margin-top: 5rem;
+	font-size:3rem;
 }
 .video h3 {
     color: #008080;
@@ -90,7 +113,7 @@ footer {
 
 .video p {
     color: #333;
-	font-size:1rem;
+	font-size:1.5rem;
 }
 
 .video video {
@@ -109,4 +132,60 @@ footer {
 .video li {
     margin-bottom: 30px;
     color: #666;
+}
+.footer {
+    background: #000;
+    text-align: center;
+    padding: 20px;
+}
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+    color: #fff;
+    font-size: 1rem;
+    background: #000; /* Fondo negro para la sección de contacto */
+}
+
+.footer address {
+    list-style-type: none;
+    padding: 0;
+    color: #fff;
+    font-size: 1rem;
+    background: #000; /* Fondo negro para la sección de ubicación */
+}
+
+.footer h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    padding: 0 1rem;
+    text-shadow: 0 .3rem .5rem rgba(0, 0, 0, .3);
+    text-transform: uppercase;
+    text-align: center; /* Centrar el texto de los encabezados */
+}
+
+.contact-location-container {
+    display: flex;
+    justify-content: space-around; /* Distribuye el espacio alrededor de los elementos de forma uniforme */
+    align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en la siguiente línea en pantallas más pequeñas */
+    text-align: center; /* Alinea el texto horizontalmente en cada sección */
+}
+
+.contact, .location {
+    flex: 1;
+    min-width: 250px; /* Asegura un ancho mínimo para mejorar la responsividad */
+    padding: 10px;
+    background: #000; /* Fondo negro para la sección de contacto y ubicación */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido dentro de cada sección */
+    align-items: center; /* Centra horizontalmente el contenido dentro de cada sección */
+}
+
+.footer-text {
+    font-size: 1rem;
+    color: #fff;
+    padding: 1.3rem 0;
+    margin-top: 20px;
+    text-align: center;
 }

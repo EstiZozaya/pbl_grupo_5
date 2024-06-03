@@ -40,7 +40,7 @@ header1 .navbar ul li {
 }
 
 header1 .navbar ul li a {
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	color:#fff;
 	transition: .2s;
 }
@@ -64,7 +64,7 @@ header1 .fa-bars {
 	transition: .2s;
 }
 header2 {
-    background-color: #008080;
+    background-color: #D3D3D3;
     color: #fff;
     padding: 20px;
     text-align: center;

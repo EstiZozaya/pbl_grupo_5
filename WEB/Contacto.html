@@ -44,7 +44,7 @@
 						<input type="email" placeholder="Correo">
 						<input type="number" placeholder="Telefono">
 						<textarea cols="15" rows="5" placeholder="Mensaje"></textarea>
-						<input type="submit" value="Enviar">
+						<input type="submit" value="Enviar" id="submit-btn"/>
 					</form>
 				</div>
 			</div>
@@ -68,5 +68,18 @@
 		</div>
 		<p class="footer-text">&copy; 2024 EyeHealth Diagnostics. Todos los derechos reservados.</p>
 		</section>
+		<script>
+			// Selecciona el botón de enviar
+			const submitButton = document.getElementById('submit-btn');
+
+			// Agrega un "escucha" de evento para el clic en el botón de enviar
+			submitButton.addEventListener('click', function(event) {
+				// Previene el comportamiento predeterminado del botón de enviar
+				event.preventDefault();
+
+				// Muestra la notificación de envío exitoso
+				alert('¡El formulario ha sido enviado correctamente!');
+			});
+		</script>
 	</body>
 </html>

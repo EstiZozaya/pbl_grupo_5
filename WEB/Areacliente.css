@@ -44,7 +44,7 @@ body {
 
 header {
 	width:100%;
-	background-color: #000 !important;
+	background:#000000;
 	position:fixed;
 	display:flex;
 	align-items: center;
@@ -57,6 +57,7 @@ header {
     max-width: 250px; /* Define un tamaño máximo para la imagen */
     height: auto; /* Mantiene la proporción de aspecto */
 }
+
 header .navbar ul {
 	display:flex;
 	align-items: center;
@@ -91,7 +92,7 @@ header .fa-bars {
 	cursor:pointer;
 	display:none;
 	transition: .2s;
-}
+} 
 
 h1 {
 	font-size: 24px;
