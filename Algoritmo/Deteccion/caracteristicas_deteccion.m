@@ -26,7 +26,7 @@ radioC = zeros(n, 1);
 radioD = zeros(n, 1);
 centro1 = zeros(n, 1);
 centro2 = zeros(n, 1);
-NRR_area_ratio = zeros(n, 1);
+NRR = zeros(n, 1);
 media = zeros(n, 1);
 media_r = zeros(n, 1);
 media_g = zeros(n, 1);
@@ -75,6 +75,17 @@ average_dh_bior37 = zeros(n, 1);
 average_dv_bior37 = zeros(n, 1);
 energy_bior37 = zeros(n, 1);
 
+entropiaNRR = zeros(n, 1);
+varianzaNRR = zeros(n, 1);
+stdNRR = zeros(n, 1);
+energyNRR = zeros(n, 1);
+mediaNRR = zeros(n, 1);
+entropiaNRR_HSV = zeros(n, 1);
+varianzaNRR_HSV = zeros(n, 1);
+stdNRR_HSV = zeros(n, 1);
+energyNRR_HSV = zeros(n, 1);
+mediaNRR_HSV = zeros(n, 1);
+
 filtro_laplace=[1, 1, 1; 1, -8, 1; 1, 1, 1];
 
 for i=1:n
@@ -85,6 +96,9 @@ roi = imread(['ROI', T_buenacalidad_revisadas.image{i}]);
 copa = imresize(copa, [300 300]);
 disco = imresize(disco, [300 300]);
 roi = imresize(roi, [300 300]);
+
+copa = imbinarize(copa);
+disco = imbinarize(disco);
 
 [filaD, columnaD] = find(disco == max(disco(:)));
 % Calcula el centroide
@@ -109,6 +123,41 @@ radio_copa = max(ancho_maximo, alto_maximo) / 2;
 red_channel = roi(:, :, 1);
 green_channel = roi(:, :, 2);
 blue_channel = roi(:, :, 3);
+
+copaR = imcomplement(copa);
+
+if radio_copa < radio_disco
+    segm = xor(disco, copaR);
+    segm = imcomplement(segm);
+else
+   segm = disco;
+end 
+
+red_channel_NRR = red_channel * 0;
+red_channel_NRR(segm) = red_channel(segm);
+green_channel_NRR = green_channel * 0;
+green_channel_NRR(segm) = green_channel(segm);
+blue_channel_NRR = blue_channel * 0;
+blue_channel_NRR(segm) = blue_channel(segm);
+
+roi_NRR(:, :, 1)= red_channel_NRR;
+roi_NRR(:, :, 2)=green_channel_NRR;
+roi_NRR(:, :, 3) =blue_channel_NRR;
+
+entropiaNRR(i) = entropy(roi_NRR);
+roi_NRR = double(roi_NRR);
+varianzaNRR(i) = var(roi_NRR(:));
+stdNRR(i) = std2(roi_NRR);
+energyNRR(i) = sum(roi_NRR(:).^2);
+mediaNRR(i) = mean(roi_NRR(:));
+
+roi_NRR = rgb2hsv(roi_NRR);
+entropiaNRR_HSV(i) = entropy(roi_NRR);
+roi_NRR = double(roi_NRR);
+varianzaNRR_HSV(i) = var(roi_NRR(:));
+stdNRR_HSV(i) = std2(roi_NRR);
+energyNRR_HSV(i) = sum(roi_NRR(:).^2);
+mediaNRR_HSV(i) = mean(roi_NRR(:));
 
 entropia(i) = entropy(roi);
 entropiaR(i) = entropy(red_channel);
@@ -198,39 +247,7 @@ radioD(i) = radio_disco;
 centro1(i) = centro_disco(1) - centro_copa(1);
 centro2(i) = centro_disco(2) - centro_copa(2);
 
-% Create a meshgrid for the coordinates
-[x, y] = meshgrid(1:size(disco, 2), 1:size(disco, 1));
-
-% Calculate distances from the center
-distX = x - centro_disco(1);
-distY = y - centro_disco(2);
-
-% Determine the quadrants
-inferior = distY > 0; % Inferior quadrants (y > center_y)
-superior = distY <= 0; % Superior quadrants (y <= center_y)
-nasal = distX <= 0;    % Nasal quadrants (x <= center_x)
-temporal = distX > 0;  % Temporal quadrants (x > center_x)
-
-% Calculate areas in each quadrant for the disc
-area_inferior_disc = sum(disco(inferior), 'all');
-area_superior_disc = sum(disco(superior), 'all');
-area_nasal_disc = sum(disco(nasal), 'all');
-area_temporal_disc = sum(disco(temporal), 'all');
-
-% Calculate areas in each quadrant for the cup
-area_inferior_cup = sum(copa(inferior), 'all');
-area_superior_cup = sum(copa(superior), 'all');
-area_nasal_cup = sum(copa(nasal), 'all');
-area_temporal_cup = sum(copa(temporal), 'all');
-
-% Total areas in each region (disc - cup)
-total_inferior = area_inferior_disc - area_inferior_cup;
-total_superior = area_superior_disc - area_superior_cup;
-total_nasal = area_nasal_disc - area_nasal_cup;
-total_temporal = area_temporal_disc - area_temporal_cup;
-
-% Calculate the NRR area ratio
-NRR_area_ratio (i) = (total_inferior + total_superior) / (total_nasal + total_temporal);
+NRR(i) = sum(sum(segm));
 
 %WAVELET
 Inorm_img = im2double(I_gray);
@@ -287,7 +304,7 @@ end
 T_caracteristicas_DETECCION = table(entropia, entropiaR, entropiaG, entropiaB, ...
     rango_dinamico, rango_dinamicoR, rango_dinamicoG, rango_dinamicoB, ...
     std_intensidad, var_intensidad, var_intensidadR, var_intensidadG, var_intensidadB, ...
-    CDR, DDLS, dist1, dist2, dist3, dist4, radioD, radioC, centro1, centro2, ...
+    CDR, DDLS,NRR, dist1, dist2, dist3, dist4, radioD, radioC, centro1, centro2, ...
     media, media_r, media_g, media_b, nitidez_borde, nitidez_bordeR, nitidez_bordeG, nitidez_bordeB, ...
     contrast_red, homogeneity_red, correlation_red, entropy_red, energy_red, ...
     contrast_green, homogeneity_green, correlation_green, entropy_green, energy_green, ...
@@ -298,10 +315,12 @@ T_caracteristicas_DETECCION = table(entropia, entropiaR, entropiaG, entropiaB, .
     energy_bior33, average_dh_bior33, average_dv_bior33,...
     energy_bior35, average_dh_bior35, average_dv_bior35,...
     energy_bior37, average_dh_bior37, average_dv_bior37,...
+    entropiaNRR, varianzaNRR, stdNRR, energyNRR ,mediaNRR,...
+      entropiaNRR_HSV, varianzaNRR_HSV, stdNRR_HSV, energyNRR_HSV ,mediaNRR_HSV,...
     'VariableNames', {'entropia', 'entropiaR', 'entropiaG', 'entropiaB', ...
     'rango_dinamico', 'rango_dinamicoR', 'rango_dinamicoG', 'rango_dinamicoB', ...
     'std_intensidad', 'var_intensidad', 'var_intensidadR', 'var_intensidadG', 'var_intensidadB', ...
-    'CDR', 'DDLS', 'dist1', 'dist2', 'dist3', 'dist4', 'radioD', 'radioC', 'centro1', 'centro2', ...
+    'CDR', 'DDLS', 'NRR','dist1', 'dist2', 'dist3', 'dist4', 'radioD', 'radioC', 'centro1', 'centro2', ...
     'media', 'media_r', 'media_g', 'media_b', 'nitidez_borde', 'nitidez_bordeR', 'nitidez_bordeG', 'nitidez_bordeB', ...
     'contrast_red', 'homogeneity_red', 'correlation_red', 'entropy_red', 'energy_red', ...
     'contrast_green', 'homogeneity_green', 'correlation_green', 'entropy_green', 'energy_green', ...
@@ -311,7 +330,9 @@ T_caracteristicas_DETECCION = table(entropia, entropiaR, entropiaG, entropiaB, .
     'energy_sym3', 'average_dh_sym3', 'average_dv_sym3', ...
     'energy_bior33', 'average_dh_bior33', 'average_dv_bior33',...
     'energy_bior35', 'average_dh_bior35', 'average_dv_bior35',...
-    'energy_bior37', 'average_dh_bior37', 'average_dv_bior37'});
+    'energy_bior37', 'average_dh_bior37', 'average_dv_bior37', ...
+    'entropiaNRR', 'varianzaNRR', 'stdNRR', 'energyNRR','mediaNRR',...
+     'entropiaNRR_HSV', 'varianzaNRR_HSV', 'stdNRR_HSV', 'energyNRR_HSV','mediaNRR_HSV'});
 
 T_caracteristicas_DETECCION.imagen = T_buenacalidad_revisadas.image;
 T_caracteristicas_DETECCION.glaucoma = T_buenacalidad_revisadas.glaucoma;
