@@ -4,8 +4,8 @@ T_buenacalidad_revisadas = readtable('metadataCALIDADCORRECTA.csv');
 [n, m] = size(T_buenacalidad_revisadas);
 
 for i=1:n
-copa = imread(['COPA', T_buenacalidad_revisadas.image{i}]);
-disco = imread(['DISCO4', T_buenacalidad_revisadas.image{i}]);
+copa = imread(['COPA2', T_buenacalidad_revisadas.image{i}]);
+disco = imread(['DISCO5', T_buenacalidad_revisadas.image{i}]);
 roi = imread(['ROI', T_buenacalidad_revisadas.image{i}]);
 
 [filaD, columnaD] = find(disco == max(disco(:)));
@@ -62,12 +62,12 @@ frame_2 = getframe(gcf);
     figuraTODO = frame_2.cdata;
 
 % Crear la carpeta 'segmentacion' si no existe
-carpeta_SEGMENTACION = 'segmentacion_TODO';
+carpeta_SEGMENTACION = 'segmentacion_TODO3';
 mkdir(carpeta_SEGMENTACION);
 
 % Obtener el nombre de la imagen y generar el nuevo nombre para la imagen segmentada
 nombre_imagen = T_buenacalidad_revisadas.image{i};
-nombre_imagen_segmentacion = ['FIGURA', nombre_imagen];
+nombre_imagen_segmentacion = ['FIGURA3', nombre_imagen];
 [~, nombre_sin_extension, extension] = fileparts(nombre_imagen_segmentacion);
 nombre_imagen_guardada = fullfile(carpeta_SEGMENTACION, [nombre_sin_extension, extension]); 
 

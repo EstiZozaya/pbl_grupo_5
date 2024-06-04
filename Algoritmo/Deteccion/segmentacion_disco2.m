@@ -6,6 +6,8 @@ T_buenacalidad_revisadas = readtable('metadataCALIDADCORRECTA.csv');
 for i=1:n
 roi = imread(['ROI', T_buenacalidad_revisadas.image{i}]);
 
+entropia = entropy(roi);
+
 red_channel = roi(:, :, 1);
 green_channel = roi(:, :, 2);
 blue_channel = roi(:, :, 3);
@@ -63,75 +65,77 @@ e_rojo = ceil(e_rojo2);  % 5 bien
 e_verde = ceil(e_verde2);
 e_azul = ceil(e_azul2);
 
-if e_gris >= e_verde && e_gris > e_rojo  
-    T_gris = graythresh(gray_sin_vasos2);
-    disc_threshold = 0.6 * max(gray_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-    disc_binary = gray_sin_vasos2 > disc_threshold; % Segmentación del disco completo
-
-    disc_binary = activecontour(gray_sin_vasos2, disc_binary, 200);
-else 
-    disc_binary = ones(size(gray_sin_vasos)); %imagen blanca pq luego se juntan los canales
-end
-
 if e_rojo >= e_verde && e_rojo2 > 4.5 && e_rojo < e_azul
     if e_rojo >= 6
         disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
         disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
-        if e_rojo2 < 5
-            disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
-        end
     else
         disc_thresholdR = 0.7 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
         disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
         disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
     end
-elseif e_rojo >= e_gris && e_rojo2 > 4.5 && e_rojo < e_verde
+elseif e_rojo >= e_gris && e_rojo2 > 4.5 && e_rojo <= e_verde
+    disc_thresholdR = 0.95 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+    disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
+    disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
+elseif e_rojo2 > 5 && entropia > 7
     disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
     disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
+    disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
 else 
     disc_binaryR = ones(size(gray_sin_vasos));
+    disc_thresholdR = 0;
+end
+
+if e_gris >= e_verde && disc_thresholdR == 0 
+    %1555 mal
+    disc_threshold = 0.6 * max(gray_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+    disc_binary = gray_sin_vasos2 > disc_threshold; % Segmentación del disco completo
+    disc_binary = activecontour(gray_sin_vasos2, disc_binary, 200);
+    se = strel('disk', 10);
+    disc_binary = imdilate(disc_binary, se);
+else 
+    disc_binary = ones(size(gray_sin_vasos)); %imagen blanca pq luego se juntan los canales
 end
 
 if e_verde > e_rojo && e_gris > e_rojo 
-    T_verde = graythresh(canal_verde_sin_vasos2);
     disc_thresholdG = 0.5 * max(canal_verde_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
+    if e_verde >= 7
+        disc_thresholdG = 0.6 * max(canal_verde_sin_vasos2(:)); 
+    end
     disc_binaryG = canal_verde_sin_vasos2 > disc_thresholdG; % Segmentación del disco completo
-    disc_binaryG = activecontour(canal_verde_sin_vasos2, disc_binaryG, 200);
+    if entropia > 7
+        disc_binaryG = activecontour(canal_verde_sin_vasos2, disc_binaryG, 200);
+    end
 else 
     disc_binaryG = ones(size(gray_sin_vasos));
 end
 
-if e_azul >= e_verde || e_azul >= 5
-    T_azul = graythresh(canal_azul_sin_vasos2);
-    disc_thresholdB = 0.4 * max(canal_azul_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
-    if e_azul >= 5 && e_azul < e_verde 
-        if e_azul2 >= 4.75
-            disc_thresholdB = 0.6 * max(canal_azul_sin_vasos2(:));
-        else
-            disc_thresholdB = 0.8 * max(canal_azul_sin_vasos2(:));
-        end
+if e_azul > e_verde && disc_thresholdR == 0 || e_azul >= 5%% && disc_thresholdR ~= 0 
+    disc_thresholdB = 0.6 * max(canal_azul_sin_vasos2(:));
+    if e_azul2 <= 4.5 && e_azul <= e_verde 
+        disc_thresholdB = 0.7 * max(canal_azul_sin_vasos2(:));
     end
     disc_binaryB = canal_azul_sin_vasos2 > disc_thresholdB; % Segmentación del disco completo
      disc_binaryB = activecontour(canal_verde_sin_vasos2, disc_binaryB, 200);
 else 
     disc_binaryB = ones(size(gray_sin_vasos));
 end
-
 % Operación lógica de intersección para la segmentación del disco 
 disc_binary_comun = disc_binary & disc_binaryR & disc_binaryG  & disc_binaryB; %juntar los canales
 
 % si la imagen se queda blanca (por si los otros if ninguno sirve)
 if disc_binary_comun(:) == 1
-    if e_rojo2 > e_gris2 && e_rojo2 > 4.5
+    if e_rojo >= 5
         if e_rojo >= 6
             disc_thresholdR = 0.9 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
         else
             disc_thresholdR = 0.8 * max(canal_rojo_sin_vasos2(:)); % Umbral para el disco completo (menos brillo)
         end
         disc_binary_comun = canal_rojo_sin_vasos2 > disc_thresholdR; 
-        if e_rojo2 < 4.75
+%         if e_rojo2 < 4.75
             disc_binary_comun = activecontour(canal_rojo_sin_vasos2, disc_binary_comun, 200);
-        end
+%         end
     else
         disc_threshold = 0.6 * max(gray_sin_vasos2(:));
         disc_binary = gray_sin_vasos2 > disc_threshold;
@@ -149,28 +153,18 @@ if disc_binary_comun(:) == 1
     end
 end
 
-se = strel('disk', 20);
+se = strel('disk', 30);
 disco = imerode(disc_binary_comun, se);
 disco = bwareafilt(disco, 1);
-se = strel('disk', 30);
+% se = strel('disk', 30);
 disco = imdilate(disco, se);
 disco = imfill(disco, "holes");
 
-[filaD, columnaD] = find(disco == max(disco(:)));
-% Calcula el centroide
-centroide_x = mean(columnaD);
-centroide_y = mean(filaD);
-centro_disco = [centroide_x, centroide_y]; 
-% Calcula el radio
-ancho_maximo = max(filaD) - min(filaD);
-alto_maximo = max(columnaD) - min(columnaD);
-radio_disco = max(ancho_maximo, alto_maximo) / 2;
-
-carpeta_DISCO = 'segmentacion_disco4';
+carpeta_DISCO = 'segmentacion_disco5';
 mkdir(carpeta_DISCO);
 
 nombre_imagen = T_buenacalidad_revisadas.image{i};
-nombre_imagen_con_disco = ['DISCO4', nombre_imagen];
+nombre_imagen_con_disco = ['DISCO5', nombre_imagen];
 % Guardar la imagen en la carpeta
 [~, nombre_sin_extension, extension] = fileparts(nombre_imagen_con_disco);
 nombre_imagen_guardada = fullfile(carpeta_DISCO, [nombre_sin_extension, extension]);

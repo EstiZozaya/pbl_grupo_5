@@ -30,7 +30,7 @@ corrected_green = mat2gray(corrected_green);
 corrected_blue = mat2gray(corrected_blue);
 corrected_gray = mat2gray(corrected_gray);
 
-red_channel =corrected_red;
+red_channel = corrected_red;
 green_channel= corrected_green;
 blue_channel = corrected_blue;
 I_gray = corrected_gray;
@@ -65,15 +65,18 @@ e_azul = entropy(roi(:,:,3));
 T_gris = graythresh(gray_sin_vasos2);
 cup_threshold = 0.9 * max(gray_sin_vasos2(:)); 
 cup_binary = gray_sin_vasos2 > cup_threshold; 
+% cup_binary = activecontour(canal_verde_sin_vasos2, cup_binary, 200);
 
 T_verde = graythresh(canal_verde_sin_vasos2);
 cup_thresholdG = 0.9 * max(canal_verde_sin_vasos2(:)); 
 cup_binaryG = canal_verde_sin_vasos2 > cup_thresholdG; 
+cup_binaryG = activecontour(canal_verde_sin_vasos2, cup_binaryG, 200);
 
 if e_azul >= 5
     T_azul = graythresh(canal_azul_sin_vasos2);
     cup_thresholdB = 0.9 * max(canal_azul_sin_vasos2(:)); 
     cup_binaryB = canal_azul_sin_vasos2 > cup_thresholdB; 
+    cup_binaryB = activecontour(canal_verde_sin_vasos2, cup_binaryB, 200);
 else
      cup_binaryB = ones(size(gray_sin_vasos));
 end
@@ -96,11 +99,11 @@ copa = imdilate(copa, se);
 % alto_maximo = max(columnaC) - min(columnaC);
 % radio_copa = max(ancho_maximo, alto_maximo) / 2;
 
-carpeta_COPA = 'segmentacion_copa';
+carpeta_COPA = 'segmentacion_copa2';
 mkdir(carpeta_COPA);
 
 nombre_imagen = T_buenacalidad_revisadas.image{i};
-nombre_imagen_con_copa = ['COPA', nombre_imagen];
+nombre_imagen_con_copa = ['COPA2', nombre_imagen];
 % Guardar la imagen en la carpeta
 [~, nombre_sin_extension, extension] = fileparts(nombre_imagen_con_copa);
 nombre_imagen_guardada = fullfile(carpeta_COPA, [nombre_sin_extension, extension]);
