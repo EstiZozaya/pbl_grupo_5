@@ -226,6 +226,7 @@ energiaNRR(i) = sum(roi_NRR(:).^2);
 energiaNRR_HSV(i) = sum(roi_NRR_HSV(:).^2);
 
 % TEXTURA
+
 roi_NRR = rgb2gray(roi_NRR);
 glcm_red = graycomatrix(red_channel, 'NumLevels', 256, 'Offset', [0 1], 'Symmetric', true);
 glcm_green = graycomatrix(green_channel, 'NumLevels', 256, 'Offset', [0 1], 'Symmetric', true);
@@ -278,7 +279,7 @@ centro2(i) = centro_disco(2) - centro_copa(2);
 
 NRR(i) = sum(sum(segm));
 
-%WAVELET
+% WAVELET
 
 Inorm_img = im2double(roi_gris);
 
