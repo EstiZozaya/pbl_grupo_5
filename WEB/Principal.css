@@ -384,62 +384,7 @@ header .fa-bars {
 	background:none;
 	border: .2rem solid #ff046f;
 }
-.contact {
-	background:#D3D3D3;
-}
 
-.contact .row {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 5rem 0;
-	text-align : center;
-}
-
-.contact .row .form-container {
-	width: 50%;
-	padding-right: 6rem;
-	
-}
-
-.contact .row .form-container input , textarea {
-	height: 4rem;
-	width: 100%;
-	background:#fff;
-	border-radius: 5rem;
-	padding: 0 1rem;
-	margin: 1rem 0;
-	color: #ff046f;
-	font-size: 1.7rem;
-	transition: .2s linear;
-}
-
-.contact .row .form-container input:focus , textarea:focus {
-	border: .rem solid #ff046f;
-} 
-
-.contact .row .form-container textarea {
-	height: 20rem;
-	border-radius: 1rem;
-	padding:1rem;
-	resize: none;
-}
-
-.contact .row .form-container input[type="submit"] {
-	height: 5rem;
-	width: 17rem;
-	background: #ff046f;
-	color:#fff;
-	cursor:pointer;
-	font-size: 2rem;
-	transition: .2s;
-}
-
-.contact .row .form-container input[type="submit"]:hover{
-	background: none;
-	color:#ff046f;
-	border: .2rem solid #ff046f;
-}
 .footer {
     background: #000;
     text-align: center;
