@@ -29,13 +29,14 @@ for i = 1:n
     I = imread(T_revisada.image{i});
     entropia(i) = entropy(I);
 
-    I = double(rgb2gray(I)); 
+    I = double(rgb2gray(I)); % damos por hecho que la imagen es de color (igual hacer un for para diferenciar)
+
     min_intensidad(i)=min(I(:));
     max_intensidad(i)=max(I(:));
     rango_dinamico(i)=max(I(:))-min(I(:));
-    std_intensidad(i) = std2(I(:)); 
-    var_intensidad(i) =var(I(:));
-    
+    std_intensidad(i) = std2(I(:)); % desviación estandar
+    var_intensidad(i) =var(I(:)); % varianza
+
     I2=imfilter(I, filtro_laplace);
     nitidez_borde(i) = sum(abs(I2(:)));
 
