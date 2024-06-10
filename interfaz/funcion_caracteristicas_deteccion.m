@@ -1,4 +1,5 @@
 % EXTRACCIÓN CARACTERISTICAS
+
 function T_caracteristicas_DETECCION = funcion_caracteristicas_deteccion(copa, disco, roi)
 copa = imresize(copa, [300 300]);
 disco = imresize(disco, [300 300]);
