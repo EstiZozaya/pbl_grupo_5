@@ -1,14 +1,14 @@
 close all; clc; clearvars;
 
-roi = RecortarROI('image_0125.jpg');
-[canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2] = Preprocesado_Segme(roi);
-disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2);
-copa = segmentacion_copa(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2);
-error = errores(disco, copa);
-figura(roi, disco, copa);
-T_caracteristicas_DETECCION = extraccion_caracteristicas(roi, disco, copa);
-load modelo_final_deteccion_SVM.mat
-glaucoma = modelo(T_caracteristicas_DETECCION, mdl_final_SVM);
+roi = RecortarROI('image_0126.jpg'); % conseguir ROI de la imagen
+[canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2] = Preprocesado_Segme(roi); % preprocesado para la segmentación del disco y copa
+disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2, roi); % segmentacion disco
+copa = segmentacion_copa(canal_verde_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2); % segmentacion copa
+error = errores(disco, copa); % deteccion de errores en la segmentacion
+figura(roi, disco, copa); % mostrar la segmentación
+T_caracteristicas_DETECCION = extraccion_caracteristicas(roi, disco, copa); % extracción de caracteristicas para el modelo
+load modelo_final_deteccion_SVM.mat % cargar modelo de detección 
+glaucoma = modelo(T_caracteristicas_DETECCION, mdl_final_SVM); % diagnostico
 
 function roi = RecortarROI(imagen)
     % Lee la imagen
@@ -52,7 +52,6 @@ function roi = RecortarROI(imagen)
 end
 
 function [canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2]  = Preprocesado_Segme(roi)
-    entropia = entropy(roi);
     
     % Separar canales y convertir imagen a blanco y negro
     red_channel = roi(:, :, 1);
@@ -100,8 +99,9 @@ function [canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gra
     
 end
 
-function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2);
+function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2, roi)
     % Calcular entropia
+    entropia = entropy(roi);    
     e_gris2 = entropy(gray_sin_vasos2);
     e_rojo2 = entropy(canal_rojo_sin_vasos2); 
     e_verde2 = entropy(canal_verde_sin_vasos2);
@@ -131,7 +131,7 @@ function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2
         disc_binaryR = canal_rojo_sin_vasos2 > disc_thresholdR;
         disc_binaryR = activecontour(canal_rojo_sin_vasos2, disc_binaryR, 200);
     else 
-        disc_binaryR = ones(size(gray_sin_vasos));
+        disc_binaryR = ones(size(gray_sin_vasos2));
         disc_thresholdR = 0;
     end
     
@@ -142,7 +142,7 @@ function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2
         se = strel('disk', 10);
         disc_binary = imdilate(disc_binary, se);
     else 
-        disc_binary = ones(size(gray_sin_vasos)); 
+        disc_binary = ones(size(gray_sin_vasos2)); 
     end
     
     if e_verde > e_rojo && e_gris > e_rojo 
@@ -155,7 +155,7 @@ function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2
             disc_binaryG = activecontour(canal_verde_sin_vasos2, disc_binaryG, 200);
         end
     else 
-        disc_binaryG = ones(size(gray_sin_vasos));
+        disc_binaryG = ones(size(gray_sin_vasos2));
     end
     
     if e_azul > e_verde && disc_thresholdR == 0 || e_azul >= 5
@@ -168,7 +168,7 @@ function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2
         disc_binaryB = canal_azul_sin_vasos2 > disc_thresholdB; 
          disc_binaryB = activecontour(canal_verde_sin_vasos2, disc_binaryB, 200);
     else 
-        disc_binaryB = ones(size(gray_sin_vasos));
+        disc_binaryB = ones(size(gray_sin_vasos2));
     end
     
     % Operación lógica de intersección para la segmentación del disco 
@@ -198,6 +198,7 @@ function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2
         end
     end
     
+    % Operaciones morfologicas
     se = strel('disk', 30);
     disco = imerode(disc_binary_comun, se);
     disco = bwareafilt(disco, 1);
@@ -205,16 +206,12 @@ function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2
     disco = imfill(disco, "holes");
 end
 
-function copa = segmentacion_copa(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2)
-    e_gris2 = entropy(gray_sin_vasos2);
-    e_rojo2 = entropy(canal_rojo_sin_vasos2); 
-    e_verde2 = entropy(canal_verde_sin_vasos2);
+function copa = segmentacion_copa(canal_verde_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2)
+    % Calcular la entropía del canal azul
     e_azul2 = entropy(canal_azul_sin_vasos2);
-    
-    e_gris = ceil(e_gris2);
-    e_rojo = ceil(e_rojo2);  
-    e_verde = ceil(e_verde2);
     e_azul = ceil(e_azul2);
+    
+    % Segmentación 
     cup_threshold = 0.9 * max(gray_sin_vasos2(:)); 
     cup_binary = gray_sin_vasos2 > cup_threshold; 
     
@@ -227,11 +224,13 @@ function copa = segmentacion_copa(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,c
         cup_binaryB = canal_azul_sin_vasos2 > cup_thresholdB; 
         cup_binaryB = activecontour(canal_verde_sin_vasos2, cup_binaryB, 200);
     else
-         cup_binaryB = ones(size(gray_sin_vasos));
+         cup_binaryB = ones(size(gray_sin_vasos2));
     end
+
     % Operación lógica de intersección para la segmentación del disco
     cup_binary_comun = cup_binary & cup_binaryG  & cup_binaryB;
     
+    % Operaciones morfologicas
     se = strel('disk', 5);
     copa = imerode(cup_binary_comun, se);
     copa = bwareafilt(copa, 1);
@@ -494,6 +493,6 @@ function T_caracteristicas_DETECCION = extraccion_caracteristicas(roi, disco, co
     'energy_bior33', 'average_dh_bior33', 'average_dv_bior33'});
 end
 
-function glaucoma = modelo(T_caracteristicas_DETECCION, mdl_final_SVM)
-    glaucoma = predict(mdl_final_SVM, T_caracteristicas_DETECCION);
+function glaucoma = modelo(T_caracteristicas_DETECCION, mdl_final_deteccion_SVM)
+    glaucoma = predict(mdl_final_deteccion_SVM, T_caracteristicas_DETECCION);
 end
