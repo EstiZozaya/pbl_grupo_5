@@ -2,8 +2,8 @@ close all; clc; clearvars;
 
 roi = RecortarROI('image_0125.jpg');
 [canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2] = Preprocesado_Segme(roi);
-disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2);
-copa = segmentacion_copa(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2);
+disco = segmentacion_disco([canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2]);
+copa = segmentacion_copa([canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2]);
 error = errores(disco, copa);
 figura(roi, disco, copa);
 T_caracteristicas_DETECCION = extraccion_caracteristicas(roi, disco, copa);
@@ -99,8 +99,6 @@ function [canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gra
     gray_sin_vasos2 = imclose (gray_sin_vasos2,se);
     
 end
-
-function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2);
     % Calcular entropia
     e_gris2 = entropy(gray_sin_vasos2);
     e_rojo2 = entropy(canal_rojo_sin_vasos2); 
@@ -203,18 +201,7 @@ function disco = segmentacion_disco(canal_verde_sin_vasos2,canal_rojo_sin_vasos2
     disco = bwareafilt(disco, 1);
     disco = imdilate(disco, se);
     disco = imfill(disco, "holes");
-end
 
-function copa = segmentacion_copa(canal_verde_sin_vasos2,canal_rojo_sin_vasos2,canal_azul_sin_vasos2,gray_sin_vasos2)
-    e_gris2 = entropy(gray_sin_vasos2);
-    e_rojo2 = entropy(canal_rojo_sin_vasos2); 
-    e_verde2 = entropy(canal_verde_sin_vasos2);
-    e_azul2 = entropy(canal_azul_sin_vasos2);
-    
-    e_gris = ceil(e_gris2);
-    e_rojo = ceil(e_rojo2);  
-    e_verde = ceil(e_verde2);
-    e_azul = ceil(e_azul2);
     cup_threshold = 0.9 * max(gray_sin_vasos2(:)); 
     cup_binary = gray_sin_vasos2 > cup_threshold; 
     

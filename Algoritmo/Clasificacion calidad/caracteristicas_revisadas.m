@@ -24,7 +24,6 @@ snr_gauss = zeros(n,1);
 energia = zeros(n,1);
 filtro_laplace=[1, 1, 1; 1, -8, 1; 1, 1, 1];
 
-
 for i = 1:n
     I = imread(T_revisada.image{i});
     entropia(i) = entropy(I);
