@@ -1,3 +1,6 @@
+% CODIGO EMPLEADO PARA CONSEGUIR LA REGIÓN DE INTERES DE TODAS LAS IMAGENES DEL CONJUNTO DE DATOS
+% QUE LUEGO SE USAN PARA ELABORAR EL MODELO DE DETECCIÓN 
+
 close all; clc; clearvars;
 T_buenacalidad_revisadas = readtable('metadataCALIDADCORRECTA.csv');
 [n, m] = size(T_buenacalidad_revisadas);
@@ -30,6 +33,7 @@ fin_y = min(size(I_gray, 2), round(centroide_y + tamano_roi/2));
 
 roi = I(inicio_x:fin_x, inicio_y:fin_y, :);
 
+% GUARDAR LAS IMAGENES
 carpeta_ROI = 'imagenes_ROI';
 mkdir(carpeta_ROI);
 

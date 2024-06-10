@@ -1,3 +1,6 @@
+% CODIGO EMPLEADO PARA EXTRAER LAS CARACTERISTICAS DE LAS IMAGENES REVISADAS DEL CONJUNTO DE DATOS
+% QUE LUEGO SE USAN PARA ELABORAR EL MODELO DE CALIDAD 
+
 close all; clc; clearvars;
 T_metadata = readtable('metadata.csv');
 
@@ -30,12 +33,13 @@ for i = 1:n
     entropia(i) = entropy(I);
 
     I = double(rgb2gray(I)); 
+
     min_intensidad(i)=min(I(:));
     max_intensidad(i)=max(I(:));
     rango_dinamico(i)=max(I(:))-min(I(:));
-    std_intensidad(i) = std2(I(:)); 
-    var_intensidad(i) =var(I(:));
-    
+    std_intensidad(i) = std2(I(:)); % desviación estandar
+    var_intensidad(i) =var(I(:)); % varianza
+
     I2=imfilter(I, filtro_laplace);
     nitidez_borde(i) = sum(abs(I2(:)));
 

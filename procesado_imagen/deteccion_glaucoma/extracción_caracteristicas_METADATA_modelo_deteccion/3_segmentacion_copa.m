@@ -1,3 +1,6 @@
+% CODIGO EMPLEADO PARA SEGMENTAR LAS COPAS DE TODAS LAS IMAGENES DEL CONJUNTO DE DATOS
+% QUE LUEGO SE USAN PARA ELABORAR EL MODELO DE DETECCIÓN 
+
 close all; clc; clearvars;
 
 T_buenacalidad_revisadas = readtable('metadataCALIDADCORRECTA.csv');
@@ -17,13 +20,11 @@ background_red = imopen(red_channel, se);
 background_green = imopen(green_channel, se);
 background_blue = imopen(blue_channel, se);
 background_gray = imopen(I_gray, se);
-
 % Corregir la imagen restando el fondo y ajustando la intensidad
 corrected_red = red_channel - background_red;
 corrected_green = green_channel - background_green;
 corrected_blue = blue_channel - background_blue;
 corrected_gray = I_gray - background_gray;
-
 % Asegurarse de que la imagen esté en el rango adecuado
 corrected_red = mat2gray(corrected_red);
 corrected_green = mat2gray(corrected_green);
@@ -37,7 +38,7 @@ I_gray = corrected_gray;
 
 se = strel('disk', 15); 
 canal_verde_sin_vasos = imclose(green_channel, se);
-canal_rojo_sin_vasos = imclose(red_channel, se); %el canal rojo no tiene vasos
+canal_rojo_sin_vasos = imclose(red_channel, se);
 canal_azul_sin_vasos = imclose(blue_channel, se);
 gray_sin_vasos = imclose (I_gray, se);
 
@@ -48,7 +49,7 @@ canal_rojo_sin_vasos2 = imadjust(red_channel);
 
 se = strel('disk', 40); 
 canal_verde_sin_vasos2 = imclose(canal_verde_sin_vasos2, se);
-canal_rojo_sin_vasos2 = imclose(canal_rojo_sin_vasos2, se); %el canal rojo no tiene vasos
+canal_rojo_sin_vasos2 = imclose(canal_rojo_sin_vasos2, se); 
 canal_azul_sin_vasos2 = imclose(canal_azul_sin_vasos2, se);
 gray_sin_vasos2 = imclose (gray_sin_vasos2,se);
 
@@ -65,7 +66,6 @@ e_azul = entropy(roi(:,:,3));
 T_gris = graythresh(gray_sin_vasos2);
 cup_threshold = 0.9 * max(gray_sin_vasos2(:)); 
 cup_binary = gray_sin_vasos2 > cup_threshold; 
-% cup_binary = activecontour(canal_verde_sin_vasos2, cup_binary, 200);
 
 T_verde = graythresh(canal_verde_sin_vasos2);
 cup_thresholdG = 0.9 * max(canal_verde_sin_vasos2(:)); 
@@ -89,23 +89,14 @@ copa = bwareafilt(copa, 1);
 se = strel('disk', 10);
 copa = imdilate(copa, se);
 
-% [filaC, columnaC] = find(copa == max(copa(:)));
-% % Calcula el centroide
-% centroide_x = mean(columnaC);
-% centroide_y = mean(filaC);
-% centro_copa = [centroide_x, centroide_y]; 
-% % Calcula el radio
-% ancho_maximo = max(filaC) - min(filaC);
-% alto_maximo = max(columnaC) - min(columnaC);
-% radio_copa = max(ancho_maximo, alto_maximo) / 2;
-
-carpeta_COPA = 'segmentacion_copa2';
-mkdir(carpeta_COPA);
-
-nombre_imagen = T_buenacalidad_revisadas.image{i};
-nombre_imagen_con_copa = ['COPA2', nombre_imagen];
-% Guardar la imagen en la carpeta
-[~, nombre_sin_extension, extension] = fileparts(nombre_imagen_con_copa);
-nombre_imagen_guardada = fullfile(carpeta_COPA, [nombre_sin_extension, extension]);
-imwrite(copa, nombre_imagen_guardada);
+% GUARDAR LAS IMAGENES SEGMENTADAS
+% carpeta_COPA = 'segmentacion_copa2';
+% mkdir(carpeta_COPA);
+% 
+% nombre_imagen = T_buenacalidad_revisadas.image{i};
+% nombre_imagen_con_copa = ['COPA2', nombre_imagen];
+% % Guardar la imagen en la carpeta
+% [~, nombre_sin_extension, extension] = fileparts(nombre_imagen_con_copa);
+% nombre_imagen_guardada = fullfile(carpeta_COPA, [nombre_sin_extension, extension]);
+% imwrite(copa, nombre_imagen_guardada);
 end

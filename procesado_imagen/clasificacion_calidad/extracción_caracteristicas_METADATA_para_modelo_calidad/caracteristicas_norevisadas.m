@@ -1,14 +1,13 @@
+% CODIGO EMPLEADO PARA EXTRAER LAS CARACTERISTICAS DE LAS IMAGENES NO REVISADAS DEL CONJUNTO DE DATOS
+% PARA LUEGO PREDECIR LA CALIDAD
+
 close all; clc; clearvars;
 T_metadata = readtable('metadata.csv');
 
-T_revisada = T_metadata;
-T_revisada(T_revisada.quality == 0, :) = [];
+T_norevisada = T_metadata;
+T_norevisada = T_norevisada(T_norevisada.quality == 0, :);
 
-num_bajocontraste = sum(T_revisada.quality == 1);
-num_desenfoque = sum(T_revisada.quality == 2);
-num_ruido = sum(T_revisada.quality == 3);
-num_calidadcorrecta = sum(T_revisada.quality == 4);
-[n, m] = size(T_revisada);
+[n, m] = size(T_norevisada);
 
 entropia = zeros(n,1);
 min_intensidad= zeros(n, 1);
@@ -26,10 +25,10 @@ filtro_laplace=[1, 1, 1; 1, -8, 1; 1, 1, 1];
 
 
 for i = 1:n
-    I = imread(T_revisada.image{i});
+    I = imread(T_norevisada.image{i});
     entropia(i) = entropy(I);
 
-    I = double(rgb2gray(I)); % damos por hecho que la imagen es de color (igual hacer un for para diferenciar)
+    I = double(rgb2gray(I)); 
 
     min_intensidad(i)=min(I(:));
     max_intensidad(i)=max(I(:));
@@ -51,7 +50,7 @@ for i = 1:n
     energia(i) = sum(I(:).^2);
 end
 
-T_caracteristicas = table(T_revisada.quality, entropia, min_intensidad, max_intensidad, rango_dinamico, std_intensidad, var_intensidad, nitidez_borde, mse_mediana, snr_mediana, mse_gauss, snr_gauss, energia, 'VariableNames', {'quality', 'entropia', 'min_intensidad', 'max_intensidad', 'rango_dinamico', 'std_intensidad', 'var_intensidad', 'nitidez_borde', 'mse_mediana', 'snr_mediana', 'mse_gauss', 'snr_gauss', 'energia'});
+T_caracteristicas = table(T_norevisada.quality, entropia, min_intensidad, max_intensidad, rango_dinamico, std_intensidad, var_intensidad, nitidez_borde, mse_mediana, snr_mediana, mse_gauss, snr_gauss, energia, 'VariableNames', {'quality', 'entropia', 'min_intensidad', 'max_intensidad', 'rango_dinamico', 'std_intensidad', 'var_intensidad', 'nitidez_borde', 'mse_mediana', 'snr_mediana', 'mse_gauss', 'snr_gauss', 'energia'});
 
-T_caracteristicas.imagen = T_revisada.image;
-writetable(T_caracteristicas, 'CaracteristicasCalidadREVISADAS.csv');
+T_caracteristicas.imagen = T_norevisada.image;
+writetable(T_caracteristicas, 'CaracteristicasCalidadNOREVISADAS.csv');

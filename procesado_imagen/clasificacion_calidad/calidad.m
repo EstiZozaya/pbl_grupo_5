@@ -1,8 +1,10 @@
+% CODIGO CON TODAS LAS FUNCIONES DE CALIDAD
+
 close all; clc; clearvars;
 
-T_caracteristicas_CALIDAD = extraccion_caracteristicas_calidad('image_0125.jpg');
-load modelo_calidad_final_SVM.mat
-calidad_im = modelo_calidad(T_caracteristicas_CALIDAD, mdl_final_TODO_SVM);
+T_caracteristicas_CALIDAD = extraccion_caracteristicas_calidad('image_0125.jpg'); % extracción de caracteristicas para el modelo
+load modelo_calidad_final_SVM.mat % cargar el modelo 
+calidad_im = modelo_calidad(T_caracteristicas_CALIDAD, mdl_final_TODO_SVM); % predicción de la calidad
 
 function T_caracteristicas_CALIDAD = extraccion_caracteristicas_calidad(imagen)
     I = imread(imagen);
