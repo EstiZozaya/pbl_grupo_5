@@ -31,7 +31,7 @@
                     </a>
                     <nav class="navbar">
                         <ul>
-                            <li><a href="Principal.html" class="active">Inicio</a></li>
+                            <li><a href="Index.html" class="active">Inicio</a></li>
                             <li><a href="Sobrenosotros.html">Quiénes somos</a></li>
                             <li><a href="Producto.html">Productos</a></li>
                             <li><a href="Inicio.html">Área cliente</a></li>
