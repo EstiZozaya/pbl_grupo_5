@@ -26,7 +26,7 @@
             </head>
             <body>
                 <header>
-                    <a href="Principal.html" class="logo">
+                    <a href="Index.html" class="logo">
                         <img src="ImagenesPBL/Logo2.png" alt="Logo" class="logo-img"/>
                     </a>
                     <nav class="navbar">
