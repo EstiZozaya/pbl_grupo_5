@@ -26,12 +26,12 @@
             </head>
             <body>
                 <header>
-                    <a href="Index.html" class="logo">
+                    <a href="index.html" class="logo">
                         <img src="ImagenesPBL/Logo2.png" alt="Logo" class="logo-img"/>
                     </a>
                     <nav class="navbar">
                         <ul>
-                            <li><a href="Index.html" class="active">Inicio</a></li>
+                            <li><a href="index.html" class="active">Inicio</a></li>
                             <li><a href="Sobrenosotros.html">Quiénes somos</a></li>
                             <li><a href="Producto.html">Productos</a></li>
                             <li><a href="Inicio.html">Área cliente</a></li>
