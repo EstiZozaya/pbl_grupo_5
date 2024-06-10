@@ -1,3 +1,5 @@
+% CODIGO CON TODAS LAS FUNCIONES DE DETECCION 
+
 close all; clc; clearvars;
 
 roi = RecortarROI('image_0126.jpg'); % conseguir ROI de la imagen

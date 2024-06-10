@@ -1,3 +1,6 @@
+% CODIGO EMPLEADO PARA EXTRAER LAS CARACTERISTICAS DE LAS IMAGENES NO REVISADAS DEL CONJUNTO DE DATOS
+% PARA LUEGO PREDECIR LA CALIDAD
+
 close all; clc; clearvars;
 T_metadata = readtable('metadata.csv');
 
@@ -25,7 +28,7 @@ for i = 1:n
     I = imread(T_norevisada.image{i});
     entropia(i) = entropy(I);
 
-    I = double(rgb2gray(I)); % damos por hecho que la imagen es de color (igual hacer un for para diferenciar)
+    I = double(rgb2gray(I)); 
 
     min_intensidad(i)=min(I(:));
     max_intensidad(i)=max(I(:));
