@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
   <configuration file="C:\Users\aimar\Documents\MU unibertsitate\3. Kurtsoa\Bigarren ebaluazioa\PBL\PBL_GitHub\pbl_grupo_5\Glaurus_Software\Interfaz.prj" location="C:\Users\aimar\Documents\MU unibertsitate\3. Kurtsoa\Bigarren ebaluazioa\PBL\PBL_GitHub\pbl_grupo_5\Glaurus_Software" name="Interfaz" target="target.ezdeploy.standalone" target-name="Application Compiler">
-    <param.appname>Interfaz_Software_Glaurus</param.appname>
+    <param.appname>Interfaz</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
@@ -11,7 +11,7 @@
     <param.description />
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>\Interfaz_Software_Glaurus\</param.installpath.string>
+    <param.installpath.string>\Interfaz\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -36,12 +36,7 @@
     <param.native.matlab>false</param.native.matlab>
     <param.checkbox>false</param.checkbox>
     <param.example />
-    <param.help.text>Syntax 
-	  -? 
-	 
- Input Arguments 
-	 -?  print help on how to use the application 
-	 input arguments</param.help.text>
+    <param.help.text />
     <unset>
       <param.icon />
       <param.icons />
@@ -78,33 +73,17 @@
       <param.native.matlab />
       <param.checkbox />
       <param.example />
+      <param.help.text />
     </unset>
     <fileset.main>
       <file>${PROJECT_ROOT}\Interfaz.mlapp</file>
     </fileset.main>
-    <fileset.resources>
-      <file>${PROJECT_ROOT}\Segmentacion.mlx</file>
-    </fileset.resources>
+    <fileset.resources />
     <fileset.package />
-    <fileset.depfun>
-      <file>${PROJECT_ROOT}\funcion_caracteristicas_deteccion.m</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\cabecera.png</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\etiketa.png</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\flecha.png</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\inicio.png</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\logo info.png</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\mapa.png</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\opcion.png</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\ordenador logo.jpg</file>
-      <file>${PROJECT_ROOT}\imagenes_interfaz\pie.png</file>
-      <file>${PROJECT_ROOT}\Modelo_Calidad.mat</file>
-      <file>${PROJECT_ROOT}\modelo_final_SVM.mat</file>
-      <file>${PROJECT_ROOT}\Segmentación.mat</file>
-      <file>${PROJECT_ROOT}\verificarErroresImagen.m</file>
-    </fileset.depfun>
+    <fileset.depfun />
     <build-deliverables>
       <file location="${PROJECT_ROOT}\Interfaz\for_testing" name="splash.png" optional="false">C:\Users\aimar\Documents\MU unibertsitate\3. Kurtsoa\Bigarren ebaluazioa\PBL\PBL_GitHub\pbl_grupo_5\Glaurus_Software\Interfaz\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\Interfaz\for_testing" name="Interfaz_Software_Glaurus.exe" optional="false">C:\Users\aimar\Documents\MU unibertsitate\3. Kurtsoa\Bigarren ebaluazioa\PBL\PBL_GitHub\pbl_grupo_5\Glaurus_Software\Interfaz\for_testing\Interfaz_Software_Glaurus.exe</file>
+      <file location="${PROJECT_ROOT}\Interfaz\for_testing" name="Interfaz.exe" optional="false">C:\Users\aimar\Documents\MU unibertsitate\3. Kurtsoa\Bigarren ebaluazioa\PBL\PBL_GitHub\pbl_grupo_5\Glaurus_Software\Interfaz\for_testing\Interfaz.exe</file>
       <file location="${PROJECT_ROOT}\Interfaz\for_testing" name="readme.txt" optional="true">C:\Users\aimar\Documents\MU unibertsitate\3. Kurtsoa\Bigarren ebaluazioa\PBL\PBL_GitHub\pbl_grupo_5\Glaurus_Software\Interfaz\for_testing\readme.txt</file>
     </build-deliverables>
     <workflow />
