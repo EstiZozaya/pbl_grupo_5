@@ -52,6 +52,7 @@ header {
 	padding: 0.8rem 1.5rem;
 	z-index: 1000;
 	transition: .2s;
+	margin-top: 0rem;
 }
 .logo-img {
     max-width: 250px; /* Define un tamaño máximo para la imagen */
@@ -93,11 +94,20 @@ header .fa-bars {
 	transition: .2s;
 }
 .questions {
-	background: #008080;
-	height: 55rem;
+	background: #D3D3D3;
+	height: 58rem;
 }
+.heading {
+    font-size: 4rem;
+    color: #ff046f;
+    text-align: center;
+    padding: 12rem 1rem 0; /* Aumenta el padding superior aquí */
+    letter-spacing: .2rem;
+    font-weight: 500;
+}
+
 .questions h3{
-	margin: 10px auto 0;
+	margin: 20px auto 0;
 }
 .faq-container {
     max-width: 1000px;

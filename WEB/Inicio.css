@@ -166,39 +166,15 @@ a {
 .footer {
     background: #000;
     text-align: center;
-    padding: 15px;
-    margin-top: auto;
+    padding: 30px 0;
+	margin-top: 90px;
 }
-
-.footer .icons {
-    padding: 3rem 0;
-}
-
-.footer .icons a {
-    height: 4.5rem;
-    width: 4.5rem;
-    line-height: 4.2rem;
-    text-align: center;
-    border-radius: 50%;
-    color: #c63bfa;
-    border: .2rem solid #c63bfa;
-    font-size: 2rem;
-    margin: 0 .1rem;
-    transition: .2s linear;
-}
-
-.footer .icons a:hover {
-    color: #fff;
-    background: #ff046f;
-    border-color: #ff046f;
-}
-
 .footer ul {
-    list-style-type: none;
-    padding: 0;
-    color: #fff;
-    font-size: 1.2rem;
-    background: #000;
+	list-style-type: none;
+	padding: 0;
+	color: #fff;
+	font-size: 1.2rem;
+	background: #000;
 }
 
 .footer address {
@@ -206,39 +182,39 @@ a {
     padding: 0;
     color: #fff;
     font-size: 1.2rem;
-    background: #000;
+    background: #000; /* Fondo negro para la sección de ubicación */
 }
 
 .footer h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #fff;
     padding: 0 1rem;
     text-shadow: 0 .3rem .5rem rgba(0, 0, 0, .3);
     text-transform: uppercase;
-    text-align: center;
+    text-align: center; /* Centrar el texto de los encabezados */
 }
 
 .contact-location-container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    text-align: center;
+    justify-content: space-around; /* Distribuye el espacio alrededor de los elementos de forma uniforme */
+    align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en la siguiente línea en pantallas más pequeñas */
+    text-align: center; /* Alinea el texto horizontalmente en cada sección */
 }
 
 .contact, .location {
     flex: 1;
-    min-width: 250px;
+    min-width: 250px; /* Asegura un ancho mínimo para mejorar la responsividad */
     padding: 10px;
-    background: #000;
+    background: #000; /* Fondo negro para la sección de contacto y ubicación */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Centra verticalmente el contenido dentro de cada sección */
+    align-items: center; /* Centra horizontalmente el contenido dentro de cada sección */
 }
 
 .footer-text {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #fff;
     padding: 1.3rem 0;
     margin-top: 20px;

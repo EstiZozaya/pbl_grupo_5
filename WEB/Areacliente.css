@@ -57,6 +57,7 @@ header {
     max-width: 250px; /* Define un tamaño máximo para la imagen */
     height: auto; /* Mantiene la proporción de aspecto */
 }
+
 header .navbar ul {
 	display:flex;
 	align-items: center;
@@ -91,110 +92,115 @@ header .fa-bars {
 	cursor:pointer;
 	display:none;
 	transition: .2s;
-}
-/* Estilos para la sección del producto */
-table {
-    margin-top: 1000px; /* Ajusta el valor según sea necesario para el espacio adicional */
-    width: 88%;
-    margin: 90px auto;
-    border-collapse: collapse;
+} 
+
+h1 {
+	font-size: 24px;
+	margin-bottom: 70px;
 }
 
-/* Resto del código CSS permanece igual */
-table, th, td {
-    border: 1px solid black;
+table {
+	margin: 60px auto;
+	border-collapse: collapse;
 }
+
+table, th, td {
+	border: 1px solid black;
+}
+
 th, td {
-    padding: 10px;
-    text-align: center;
+	padding: 10px;
+	text-align: center;
 	font-size: 14px;
 }
+
 th {
-    background-color: #f2f2f2;
-    text-align: center;
+	background-color: #f2f2f2;
+	text-align: center;
 }
+
 table img {
-    max-width: 200px; /* Ancho máximo de la imagen */
-    height: auto; /* Altura automática para mantener la proporción */
+	max-width: 200px;
+	height: auto;
 }
 
 .footer {
-    background: #000;
-    text-align: center;
-    padding: 15px;
+	background: #000;
+	text-align: center;
+	padding: 15px;
 }
 
 .footer .icons {
-    padding: 3rem 0;
+	padding: 3rem 0;
 }
 
 .footer .icons a {
-    height: 4.5rem;
-    width: 4.5rem;
-    line-height: 4.2rem;
-    text-align: center;
-    border-radius: 50%;
-    color: #c63bfa;
-    border: .2rem solid #c63bfa;
-    font-size: 2rem;
-    margin: 0 .1rem;
-    transition: .2s linear;
+	height: 4.5rem;
+	width: 4.5rem;
+	line-height: 4.2rem;
+	text-align: center;
+	border-radius: 50%;
+	color: #c63bfa;
+	border: .2rem solid #c63bfa;
+	font-size: 2rem;
+	margin: 0 .1rem;
+	transition: .2s linear;
 }
 
 .footer .icons a:hover {
-    color: #fff;
-    background: #ff046f;
-    border-color: #ff046f;
+	color: #fff;
+	background: #ff046f;
+	border-color: #ff046f;
 }
 
 .footer ul {
-    list-style-type: none;
-    padding: 0;
-    color: #fff;
-    font-size: 1.2rem;
-    background: #000; /* Fondo negro para la sección de contacto */
+	list-style-type: none;
+	padding: 0;
+	color: #fff;
+	font-size: 1.2rem;
+	background: #000;
 }
 
 .footer address {
-    list-style-type: none;
-    padding: 0;
-    color: #fff;
-    font-size: 1.2rem;
-    background: #000; /* Fondo negro para la sección de ubicación */
+	list-style-type: none;
+	padding: 0;
+	color: #fff;
+	font-size: 1.2rem;
+	background: #000;
 }
 
 .footer h2 {
-    font-size: 3rem;
-    color: #fff;
-    padding: 0 1rem;
-    text-shadow: 0 .3rem .5rem rgba(0, 0, 0, .3);
-    text-transform: uppercase;
-    text-align: center; /* Centrar el texto de los encabezados */
+	font-size: 3rem;
+	color: #fff;
+	padding: 0 1rem;
+	text-shadow: 0 .3rem .5rem rgba(0, 0, 0, .3);
+	text-transform: uppercase;
+	text-align: center;
 }
 
 .contact-location-container {
-    display: flex;
-    justify-content: space-around; /* Distribuye el espacio alrededor de los elementos de forma uniforme */
-    align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en la siguiente línea en pantallas más pequeñas */
-    text-align: center; /* Alinea el texto horizontalmente en cada sección */
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	text-align: center;
 }
 
 .contact, .location {
-    flex: 1;
-    min-width: 250px; /* Asegura un ancho mínimo para mejorar la responsividad */
-    padding: 10px;
-    background: #000; /* Fondo negro para la sección de contacto y ubicación */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra verticalmente el contenido dentro de cada sección */
-    align-items: center; /* Centra horizontalmente el contenido dentro de cada sección */
+	flex: 1;
+	min-width: 250px;
+	padding: 10px;
+	background: #000;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .footer-text {
-    font-size: 1.4rem;
-    color: #fff;
-    padding: 1.3rem 0;
-    margin-top: 20px;
-    text-align: center;
+	font-size: 1.4rem;
+	color: #fff;
+	padding: 1.3rem 0;
+	margin-top: 20px;
+	text-align: center;
 }

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Crear encabezado de la tabla
             var headerRow = document.createElement("tr");
-            var headers = ["ID", "Sexo", "Hospital", "Teléfono", "Historial Médico", "Diagnóstico de Glaucoma"];
+            var headers = ["ID", "Sexo", "Hospital", "Teléfono", "Historial Médico", "Diagnóstico de Glaucoma", "Fecha de Diagnóstico", "Imagen"];
             headers.forEach(function(header) {
                 var th = document.createElement("th");
                 th.textContent = header;
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 var resultado = diagnostico.getElementsByTagName("Resultado")[0].textContent;
                 var fechaDiagnostico = diagnostico.getElementsByTagName("FechaDiagnostico")[0].textContent;
                 var imagen = diagnostico.getElementsByTagName("Imagen")[0].textContent;
-                var diagnosticoCompleto = `Resultado: ${resultado}<br>Fecha: ${fechaDiagnostico}<br><img src="${imagen}" alt="Imagen de diagnóstico de glaucoma">`;
+                var diagnosticoCompleto = `Resultado: ${resultado}`;
 
                 // Crear celdas de la fila
                 var idCell = document.createElement("td");
@@ -86,6 +86,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 historialCell.style.minWidth = "200px"; // Ancho mínimo ajustado
                 var diagnosticoCell = document.createElement("td");
                 diagnosticoCell.innerHTML = diagnosticoCompleto;
+                var fechaDiagnosticoCell = document.createElement("td");
+                fechaDiagnosticoCell.innerHTML = fechaDiagnostico;
+                var imagenCell = document.createElement("td");
+                var imagenElement = document.createElement("img");
+                imagenElement.src = imagen;
+                imagenElement.alt = "Imagen de diagnóstico de glaucoma";
+                imagenCell.appendChild(imagenElement);
 
                 // Añadir celdas a la fila
                 row.appendChild(idCell);
@@ -94,6 +101,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 row.appendChild(telefonoCell);
                 row.appendChild(historialCell);
                 row.appendChild(diagnosticoCell);
+                row.appendChild(fechaDiagnosticoCell);
+                row.appendChild(imagenCell);
 
                 // Añadir fila al cuerpo de la tabla
                 tbody.appendChild(row);
@@ -106,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     xhr.send();
 });
+
 
 
 

@@ -14,13 +14,13 @@
 	
 	<body>
 		<header>
-			<a href="Principal.html" class="logo">
+			<a href="index.html" class="logo">
 				<img src="ImagenesPBL/Logo2.png" alt="Logo" class="logo-img">
 			</a>
 			
 			<nav class="navbar">
 				<ul>
-					<li><a href="Principal.html" class="active">Inicio</a></li>
+					<li><a href="index.html" class="active">Inicio</a></li>
 					<li><a href="Sobrenosotros.html">Quiénes somos</a></li>
 					<li><a href="Producto.html">Productos</a></li>
 					<li><a href="Inicio.html">Área cliente</a></li>
@@ -44,7 +44,7 @@
 						<input type="email" placeholder="Correo">
 						<input type="number" placeholder="Telefono">
 						<textarea cols="15" rows="5" placeholder="Mensaje"></textarea>
-						<input type="submit" value="Enviar">
+						<input type="submit" value="Enviar" id="submit-btn"/>
 					</form>
 				</div>
 			</div>
@@ -68,5 +68,18 @@
 		</div>
 		<p class="footer-text">&copy; 2024 EyeHealth Diagnostics. Todos los derechos reservados.</p>
 		</section>
+		<script>
+			// Selecciona el botón de enviar
+			const submitButton = document.getElementById('submit-btn');
+
+			// Agrega un "escucha" de evento para el clic en el botón de enviar
+			submitButton.addEventListener('click', function(event) {
+				// Previene el comportamiento predeterminado del botón de enviar
+				event.preventDefault();
+
+				// Muestra la notificación de envío exitoso
+				alert('¡El formulario ha sido enviado correctamente!');
+			});
+		</script>
 	</body>
 </html>

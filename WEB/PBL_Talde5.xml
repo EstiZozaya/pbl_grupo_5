@@ -31,7 +31,7 @@
 			<Diagnostico>
 				<Resultado>Si</Resultado>
 				<FechaDiagnostico>2022-11-15</FechaDiagnostico>
-				<Imagen>C:\Users\izaro\OneDrive\Escritorio\biomedika\TERCERO\Segundo cuatri\PBL\MIO\WEB\ImagenesPBL\Glaucoma.jpg</Imagen>
+				<Imagen>ImagenesPBL/Glaucoma.jpg</Imagen>
 			</Diagnostico>
 		</Glaucoma>
 	</Paciente>
@@ -56,7 +56,91 @@
 			<Diagnostico>
 				<Resultado>No</Resultado>
 				<FechaDiagnostico>2022-11-15</FechaDiagnostico>
-				<Imagen>C:\Users\izaro\OneDrive\Escritorio\biomedika\TERCERO\Segundo cuatri\PBL\MIO\WEB\ImagenesPBL\Glaucoma2.jpg</Imagen>
+				<Imagen>ImagenesPBL/Glaucoma2.jpg</Imagen>
+			</Diagnostico>
+		</Glaucoma>
+	</Paciente>
+	<Paciente id="4962GTV">
+		<Sexo>Mujer</Sexo>
+		<Hospital>Txagorritxu</Hospital>
+		<Telefono>649186227</Telefono>
+		<HistorialMedico>
+            <Entrada>
+                <Fecha>2008-11-05</Fecha>
+                <Descripcion>Hipertensión</Descripcion>
+                <Tratamiento>
+                    <Medicacion>
+                        <NombreMed>Enalparil</NombreMed>
+                        <Dosis>5mg</Dosis>
+                        <Frecuencia>1 vez al día</Frecuencia>
+                    </Medicacion>
+                </Tratamiento>
+            </Entrada>
+            <Entrada>
+                <Fecha>2012-01-02</Fecha>
+                <Descripcion>Extirpación de lipoma</Descripcion>
+                <Tratamiento>
+                    <Procedimiento>
+                        <Tipo>Extracción de un lipoma</Tipo>
+                    </Procedimiento>
+                </Tratamiento>
+            </Entrada>
+		</HistorialMedico>
+		<Glaucoma>
+			<Diagnostico>
+				<Resultado>Si</Resultado>
+				<FechaDiagnostico>2023-05-24</FechaDiagnostico>
+				<Imagen>ImagenesPBL/Glaucoma4.jpg</Imagen>
+			</Diagnostico>
+		</Glaucoma>
+	</Paciente>
+	<Paciente id="8195MKR">
+		<Sexo>Hombre</Sexo>
+		<Hospital>Cruces</Hospital>
+		<Telefono>618925486</Telefono>
+		<HistorialMedico>
+            <Entrada>
+                <Fecha>1999-02-14</Fecha>
+                <Descripcion>Asma</Descripcion>
+                <Tratamiento>
+                    <Medicacion>
+                        <NombreMed>Fluticasona</NombreMed>
+                        <Dosis>250mcg</Dosis>
+                        <Frecuencia>Inhalación 2 veces al día</Frecuencia>
+                    </Medicacion>
+                </Tratamiento>
+            </Entrada>
+		</HistorialMedico>
+		<Glaucoma>
+			<Diagnostico>
+				<Resultado>No</Resultado>
+				<FechaDiagnostico>2024-06-04</FechaDiagnostico>
+				<Imagen>ImagenesPBL/Glaucoma3.jpg</Imagen>
+			</Diagnostico>
+		</Glaucoma>
+	</Paciente>
+	<Paciente id="2189JVR">
+		<Sexo>Hombre</Sexo>
+		<Hospital>Alto Deba</Hospital>
+		<Telefono>614962846</Telefono>
+		<HistorialMedico>
+            <Entrada>
+                <Fecha>2000-04-19</Fecha>
+                <Descripcion>Hipotiroidismo</Descripcion>
+                <Tratamiento>
+                    <Medicacion>
+                        <NombreMed>Levotiroxina</NombreMed>
+                        <Dosis>50 mcg</Dosis>
+                        <Frecuencia>Una vez al día</Frecuencia>
+                    </Medicacion>
+                </Tratamiento>
+            </Entrada>
+		</HistorialMedico>
+		<Glaucoma>
+			<Diagnostico>
+				<Resultado>Si</Resultado>
+				<FechaDiagnostico>2023-06-01</FechaDiagnostico>
+				<Imagen>ImagenesPBL/Glaucoma5.jpg</Imagen>
 			</Diagnostico>
 		</Glaucoma>
 	</Paciente>
